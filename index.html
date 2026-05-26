@@ -1,0 +1,953 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="theme-color" content="#1a56db">
+<title>GeoDomain Pro</title>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: rgba(0,0,0,0); }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #f3f4f6; color: #111827; min-height: 100vh; font-size: 14px; }
+
+/* PAGES */
+.page { display: none; min-height: 100vh; flex-direction: column; }
+.page.show { display: flex; }
+
+/* HEADER */
+.hdr { background: linear-gradient(135deg, #1e40af, #1a56db); padding: 16px; padding-top: calc(16px + env(safe-area-inset-top)); color: #fff; }
+.hdr-row { display: flex; align-items: center; justify-content: space-between; margin-bottom: 4px; }
+.hdr h1 { font-size: 18px; font-weight: 700; }
+.hdr p { font-size: 12px; color: rgba(255,255,255,0.8); }
+.badge { background: rgba(255,255,255,0.2); padding: 3px 9px; border-radius: 20px; font-size: 11px; font-weight: 600; color: #fff; }
+
+/* TABS */
+.tabs { display: flex; background: rgba(0,0,0,0.15); border-radius: 10px; margin-top: 12px; padding: 3px; }
+.tab-btn { flex: 1; padding: 7px 4px; font-size: 12px; font-weight: 600; color: rgba(255,255,255,0.7); background: none; border: none; border-radius: 8px; cursor: pointer; font-family: inherit; transition: all 0.2s; }
+.tab-btn.active { background: #fff; color: #1a56db; }
+
+/* SCROLL BODY */
+.scroll { flex: 1; overflow-y: auto; padding: 16px; }
+.scroll-nop { flex: 1; overflow-y: auto; }
+
+/* SECTION LABEL */
+.sec { font-size: 11px; font-weight: 700; color: #6b7280; text-transform: uppercase; letter-spacing: 0.06em; margin: 16px 0 6px; }
+.sec:first-child { margin-top: 0; }
+
+/* KEY BOX */
+.keybox { background: #fff; border-radius: 12px; padding: 14px; border: 1px solid #e5e7eb; }
+.keybox-lbl { font-size: 13px; color: #374151; margin-bottom: 8px; font-weight: 500; }
+.keybox-row { display: flex; gap: 8px; }
+.key-input { flex: 1; padding: 10px 12px; border: 1.5px solid #d1d5db; border-radius: 8px; font-size: 13px; background: #f9fafb; color: #111827; font-family: 'Courier New', monospace; min-width: 0; outline: none; }
+.key-input:focus { border-color: #1a56db; background: #fff; }
+.key-save-btn { padding: 10px 16px; background: #1a56db; color: #fff; border: none; border-radius: 8px; font-size: 13px; font-weight: 700; cursor: pointer; font-family: inherit; white-space: nowrap; }
+.key-save-btn:active { background: #1e40af; }
+.key-hint { font-size: 11px; color: #9ca3af; margin-top: 6px; }
+.key-hint a { color: #1a56db; }
+.key-ok { font-size: 12px; color: #059669; font-weight: 600; margin-top: 5px; display: none; }
+.key-status { display: flex; align-items: center; gap: 8px; background: rgba(255,255,255,0.15); border-radius: 8px; padding: 8px 11px; margin-top: 10px; }
+.key-dot { width: 8px; height: 8px; border-radius: 50%; background: #ef4444; flex-shrink: 0; }
+.key-dot.on { background: #10b981; }
+.key-status-txt { font-size: 12px; color: rgba(255,255,255,0.9); }
+
+/* OPTION GRID */
+.opt-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
+.opt-btn { padding: 9px 8px; border: 1.5px solid #d1d5db; border-radius: 9px; font-size: 12px; font-weight: 500; color: #374151; background: #fff; cursor: pointer; text-align: center; font-family: inherit; }
+.opt-btn.active { background: #eff6ff; border-color: #1a56db; color: #1e40af; font-weight: 700; }
+
+/* CHIPS */
+.chip-wrap { display: flex; flex-wrap: wrap; gap: 6px; }
+.chip { padding: 7px 13px; border: 1.5px solid #d1d5db; border-radius: 20px; font-size: 13px; font-weight: 500; color: #374151; background: #fff; cursor: pointer; user-select: none; }
+.chip.active { background: #eff6ff; border-color: #1a56db; color: #1e40af; font-weight: 700; }
+.chip.active.green { background: #f0fdf4; border-color: #059669; color: #065f46; }
+
+/* PREVIEW */
+.preview { background: #fff; border: 1px solid #e5e7eb; border-radius: 8px; padding: 10px 12px; font-size: 12px; color: #374151; line-height: 1.5; margin-top: 8px; min-height: 36px; }
+
+/* RUN BUTTON */
+.run-btn { width: 100%; padding: 14px; background: linear-gradient(135deg, #1e40af, #1a56db); color: #fff; border: none; border-radius: 12px; font-size: 15px; font-weight: 700; cursor: pointer; margin-top: 16px; font-family: inherit; box-shadow: 0 4px 12px rgba(26,86,219,0.3); }
+.run-btn:active { transform: scale(0.98); background: #1e40af; }
+
+/* LOADER */
+.loader { display: flex; flex-direction: column; align-items: center; justify-content: center; flex: 1; gap: 12px; padding: 40px 20px; }
+.spin { width: 40px; height: 40px; border: 3px solid #e5e7eb; border-top-color: #1a56db; border-radius: 50%; animation: spin 0.8s linear infinite; }
+@keyframes spin { to { transform: rotate(360deg); } }
+.loader-title { font-size: 15px; font-weight: 700; color: #111827; text-align: center; }
+.loader-sub { font-size: 12px; color: #6b7280; text-align: center; font-style: italic; }
+.loader-step { font-size: 12px; color: #1a56db; font-weight: 600; }
+.prog-wrap { width: 70%; background: #e5e7eb; border-radius: 4px; height: 4px; }
+.prog-bar { height: 4px; background: #1a56db; border-radius: 4px; width: 5%; transition: width 0.4s; }
+
+/* RESULT HEADER */
+.res-hdr { display: flex; align-items: center; justify-content: space-between; padding: 14px 16px 8px; background: #fff; border-bottom: 1px solid #e5e7eb; }
+.res-title { font-size: 16px; font-weight: 700; color: #111827; }
+.back-btn { padding: 7px 14px; background: #f3f4f6; border: 1.5px solid #d1d5db; border-radius: 20px; font-size: 13px; font-weight: 600; cursor: pointer; color: #374151; font-family: inherit; }
+.back-btn:active { background: #e5e7eb; }
+
+/* STATS */
+.stats-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; padding: 12px 16px; }
+.stat { background: #fff; border-radius: 10px; padding: 10px 6px; text-align: center; border: 1px solid #e5e7eb; }
+.stat-v { font-size: 20px; font-weight: 800; color: #111827; }
+.stat-l { font-size: 10px; color: #6b7280; text-transform: uppercase; font-weight: 600; letter-spacing: 0.04em; }
+
+/* INSIGHT BOX */
+.insight { background: linear-gradient(135deg, #eef2ff, #eff6ff); border: 1px solid #c7d2fe; border-radius: 12px; padding: 12px 14px; margin: 0 16px 12px; }
+.insight-title { font-size: 11px; font-weight: 700; color: #3730a3; text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 6px; }
+.insight-item { font-size: 12px; color: #1f2937; padding: 3px 0; border-bottom: 1px solid rgba(0,0,0,0.06); line-height: 1.5; font-weight: 500; }
+.insight-item:last-child { border-bottom: none; }
+
+/* RESULT TABS */
+.res-tabs { display: flex; overflow-x: auto; padding: 0 16px; border-bottom: 1px solid #e5e7eb; background: #fff; }
+.res-tabs::-webkit-scrollbar { display: none; }
+.res-tab { padding: 10px 14px; font-size: 12px; font-weight: 600; color: #6b7280; white-space: nowrap; cursor: pointer; border-bottom: 2px solid transparent; background: none; border-top: none; border-left: none; border-right: none; font-family: inherit; flex-shrink: 0; }
+.res-tab.active { color: #1a56db; border-bottom-color: #1a56db; }
+
+/* SECTION CONTENT */
+.sec-content { display: none; }
+.sec-content.active { display: block; }
+
+/* CARDS */
+.cards { padding: 12px 16px 80px; display: flex; flex-direction: column; gap: 10px; }
+.card { background: #fff; border-radius: 12px; border: 1px solid #e5e7eb; overflow: hidden; }
+.card-top { padding: 12px 14px 10px; display: flex; align-items: flex-start; gap: 10px; }
+.rank { width: 26px; height: 26px; border-radius: 50%; background: #f3f4f6; font-size: 11px; font-weight: 800; color: #6b7280; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.rank.gold { background: #fef3c7; color: #92400e; }
+.rank.blue { background: #eff6ff; color: #1e40af; }
+.card-info { flex: 1; min-width: 0; }
+.card-domain { font-size: 14px; font-weight: 800; color: #1a56db; font-family: 'Courier New', monospace; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.card-meta { font-size: 11px; color: #4b5563; margin-top: 2px; font-weight: 600; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.demand { padding: 3px 9px; border-radius: 20px; font-size: 11px; font-weight: 700; flex-shrink: 0; text-transform: uppercase; }
+.d-extreme { background: #dcfce7; color: #14532d; }
+.d-high { background: #d1fae5; color: #065f46; }
+.d-medium { background: #fef3c7; color: #78350f; }
+.d-low { background: #f3f4f6; color: #374151; }
+.card-why { padding: 0 14px 10px; font-size: 12px; color: #1f2937; line-height: 1.6; font-weight: 500; border-bottom: 1px solid #f3f4f6; }
+.card-foot { padding: 10px 14px; display: flex; flex-wrap: wrap; gap: 8px; align-items: center; justify-content: space-between; }
+.scores { display: flex; gap: 10px; }
+.score { text-align: center; }
+.score-v { font-size: 15px; font-weight: 800; color: #111827; }
+.score-l { font-size: 9px; color: #6b7280; text-transform: uppercase; font-weight: 700; letter-spacing: 0.04em; }
+.resale { font-size: 12px; font-weight: 700; background: #f3f4f6; padding: 4px 10px; border-radius: 20px; color: #111827; }
+.avail { font-size: 11px; padding: 3px 9px; border-radius: 20px; font-weight: 700; }
+.av-h { background: #dcfce7; color: #14532d; }
+.av-m { background: #fef3c7; color: #78350f; }
+.av-l { background: #fee2e2; color: #7f1d1d; }
+.card-vars { padding: 0 14px 10px; display: flex; flex-wrap: wrap; gap: 4px; }
+.var-pill { font-size: 11px; background: #f3f4f6; padding: 3px 9px; border-radius: 20px; color: #374151; font-weight: 500; }
+.pitch-btn { width: 100%; padding: 11px; background: #f0f7ff; border: none; border-top: 1px solid #e5e7eb; font-size: 13px; font-weight: 700; color: #1a56db; cursor: pointer; font-family: inherit; border-radius: 0 0 12px 12px; }
+.pitch-btn:active { background: #dbeafe; }
+
+/* LOAD BTN */
+.load-sec { padding: 24px 16px; text-align: center; }
+.load-sec p { font-size: 13px; color: #6b7280; margin-bottom: 12px; font-weight: 500; }
+.load-sec-btn { padding: 11px 28px; background: linear-gradient(135deg, #1e40af, #1a56db); color: #fff; border: none; border-radius: 10px; font-size: 13px; font-weight: 700; cursor: pointer; font-family: inherit; }
+.load-sec-btn:active { background: #1e40af; }
+
+/* ERROR */
+.error-box { margin: 16px; background: #fee2e2; border: 1px solid #fca5a5; border-radius: 12px; padding: 14px; font-size: 13px; color: #7f1d1d; line-height: 1.6; font-weight: 500; }
+
+/* ANALYZER */
+.ana-result { background: #fff; border-radius: 12px; border: 1px solid #e5e7eb; overflow: hidden; margin-bottom: 12px; }
+.ana-head { background: linear-gradient(135deg, #1e40af, #1a56db); padding: 14px; color: #fff; }
+.ana-domain { font-size: 18px; font-weight: 800; font-family: 'Courier New', monospace; }
+.ana-sub { font-size: 12px; color: rgba(255,255,255,0.8); margin-top: 3px; font-weight: 500; }
+.ana-body { padding: 14px; }
+.score-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px; margin-bottom: 14px; }
+.sg { background: #f9fafb; border-radius: 10px; padding: 10px 4px; text-align: center; border: 1px solid #e5e7eb; }
+.sg-v { font-size: 20px; font-weight: 800; color: #111827; }
+.sg-l { font-size: 10px; color: #6b7280; text-transform: uppercase; font-weight: 700; letter-spacing: 0.03em; }
+.section-title { font-size: 11px; font-weight: 700; color: #6b7280; text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 6px; }
+.verdict { font-size: 14px; font-weight: 700; color: #111827; line-height: 1.5; margin-bottom: 10px; }
+.why-text { font-size: 13px; color: #1f2937; line-height: 1.6; font-weight: 500; }
+.sep { border: none; border-top: 1px solid #f3f4f6; margin: 12px 0; }
+.meta-wrap { display: flex; flex-wrap: wrap; gap: 6px; }
+.meta-pill { font-size: 12px; font-weight: 600; padding: 4px 10px; border-radius: 20px; }
+.mp-blue { background: #eff6ff; color: #1e40af; }
+.mp-green { background: #dcfce7; color: #14532d; }
+.mp-amber { background: #fef3c7; color: #78350f; }
+.mp-purple { background: #ede9fe; color: #4c1d95; }
+.alts { display: flex; flex-direction: column; gap: 6px; margin-top: 6px; }
+.alt-dom { font-size: 13px; font-weight: 700; font-family: 'Courier New', monospace; color: #1a56db; background: #eff6ff; padding: 8px 12px; border-radius: 8px; }
+
+/* PITCH */
+.pitch-wrap { padding: 16px; }
+.email-card { background: #fff; border-radius: 12px; padding: 14px; margin-bottom: 10px; border: 1px solid #e5e7eb; }
+.email-day { font-size: 11px; font-weight: 700; color: #6b7280; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 6px; }
+.email-sub { font-size: 14px; font-weight: 700; color: #111827; margin-bottom: 8px; }
+.email-body { font-size: 13px; color: #1f2937; line-height: 1.7; white-space: pre-wrap; font-weight: 500; }
+.copy-btn { width: 100%; padding: 10px; background: #1a56db; color: #fff; border: none; border-radius: 8px; font-size: 13px; font-weight: 700; cursor: pointer; margin-top: 10px; font-family: inherit; }
+.copy-btn:active { background: #1e40af; }
+.tip { background: #eff6ff; border-radius: 10px; padding: 12px; font-size: 13px; color: #1e40af; line-height: 1.6; font-weight: 500; }
+
+/* SELECT */
+.sel-wrap { position: relative; }
+.sel-wrap select { width: 100%; padding: 11px 32px 11px 12px; border: 1.5px solid #d1d5db; border-radius: 9px; font-size: 13px; background: #fff; color: #111827; appearance: none; -webkit-appearance: none; font-family: inherit; font-weight: 500; outline: none; cursor: pointer; }
+.sel-wrap select:focus { border-color: #1a56db; }
+.sel-wrap::after { content: '▾'; position: absolute; right: 11px; top: 50%; transform: translateY(-50%); color: #6b7280; pointer-events: none; font-size: 14px; }
+
+/* TEXT INPUT */
+.text-inp { width: 100%; padding: 11px 12px; border: 1.5px solid #d1d5db; border-radius: 9px; font-size: 13px; background: #fff; color: #111827; font-family: inherit; font-weight: 500; outline: none; }
+.text-inp:focus { border-color: #1a56db; }
+
+/* 2-COL GRID */
+.two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 8px; }
+
+/* NO DATA */
+.no-data { text-align: center; padding: 32px 16px; color: #6b7280; font-size: 13px; font-weight: 500; }
+
+/* FIRST LAUNCH OVERLAY */
+.overlay { position: fixed; inset: 0; background: linear-gradient(135deg, #1e3a8a, #1a56db); z-index: 999; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 24px; text-align: center; }
+.overlay.hidden { display: none; }
+.overlay-icon { font-size: 56px; margin-bottom: 14px; }
+.overlay h2 { font-size: 24px; font-weight: 800; color: #fff; margin-bottom: 6px; }
+.overlay p { font-size: 13px; color: rgba(255,255,255,0.8); margin-bottom: 24px; line-height: 1.6; }
+.overlay-box { background: #fff; border-radius: 16px; padding: 18px; width: 100%; max-width: 360px; text-align: left; }
+.overlay-box label { font-size: 13px; color: #374151; font-weight: 600; display: block; margin-bottom: 8px; }
+.overlay-inp { width: 100%; padding: 11px 12px; border: 1.5px solid #d1d5db; border-radius: 9px; font-size: 13px; font-family: 'Courier New', monospace; margin-bottom: 10px; background: #f9fafb; color: #111827; outline: none; }
+.overlay-inp:focus { border-color: #1a56db; }
+.overlay-save { width: 100%; padding: 13px; background: linear-gradient(135deg, #1e40af, #1a56db); color: #fff; border: none; border-radius: 10px; font-size: 15px; font-weight: 700; cursor: pointer; font-family: inherit; }
+.overlay-save:active { background: #1e40af; }
+.overlay-hint { font-size: 11px; color: #9ca3af; text-align: center; margin-top: 8px; }
+.overlay-hint a { color: #1a56db; }
+</style>
+</head>
+<body>
+
+<!-- FIRST LAUNCH OVERLAY -->
+<div class="overlay" id="overlay">
+  <div class="overlay-icon">🌐</div>
+  <h2>GeoDomain Pro</h2>
+  <p>Enter your Anthropic API key to get started.<br>One-time setup — saved on this device only.</p>
+  <div class="overlay-box">
+    <label>Anthropic API Key</label>
+    <input class="overlay-inp" type="password" id="overlayKey" placeholder="sk-ant-api03-..." autocomplete="off" spellcheck="false">
+    <button class="overlay-save" id="overlaySave">Save & Start →</button>
+    <div class="overlay-hint">Get your free key at <a href="https://console.anthropic.com/settings/keys" target="_blank">console.anthropic.com</a></div>
+  </div>
+</div>
+
+<!-- PAGE: HOME -->
+<div class="page show" id="pageHome">
+  <div class="hdr">
+    <div class="hdr-row">
+      <div>
+        <h1>GeoDomain Pro</h1>
+        <p>Elite domain investment engine</p>
+      </div>
+      <span class="badge">v5.0</span>
+    </div>
+    <div class="key-status">
+      <div class="key-dot" id="keyDot"></div>
+      <span class="key-status-txt" id="keyTxt">No API key</span>
+    </div>
+    <div class="tabs" id="mainTabs">
+      <button class="tab-btn active" data-tab="0">🔍 Discovery</button>
+      <button class="tab-btn" data-tab="1">🧠 Analyzer</button>
+      <button class="tab-btn" data-tab="2">⚙️ Settings</button>
+    </div>
+  </div>
+
+  <!-- TAB 0: DISCOVERY -->
+  <div class="scroll" id="tabContent0">
+    <p class="sec">Output Type</p>
+    <div class="opt-grid" id="outGrid">
+      <div class="opt-btn active" data-out="0">🏆 Highest Value</div>
+      <div class="opt-btn" data-out="1">⚡ Fast Resell</div>
+      <div class="opt-btn" data-out="2">🎯 Best Lead Gen</div>
+      <div class="opt-btn" data-out="3">💎 Undervalued</div>
+      <div class="opt-btn" data-out="4">🏘 Wealthy Suburbs</div>
+      <div class="opt-btn" data-out="5">🌆 Mid-Size Cities</div>
+    </div>
+
+    <p class="sec">Keyword Categories</p>
+    <div class="chip-wrap" id="kwChips">
+      <div class="chip active" data-kw="legal">⚖️ Legal</div>
+      <div class="chip active" data-kw="home">🏠 Home Services</div>
+      <div class="chip active" data-kw="health">🏥 Health</div>
+      <div class="chip" data-kw="tech">💻 Tech & IT</div>
+      <div class="chip" data-kw="realestate">🏢 Real Estate</div>
+      <div class="chip" data-kw="financial">💰 Financial</div>
+      <div class="chip" data-kw="auto">🚗 Auto</div>
+      <div class="chip" data-kw="solar">☀️ Solar</div>
+    </div>
+
+    <p class="sec">Target States</p>
+    <div class="chip-wrap" id="stateChips">
+      <div class="chip active green" data-st="Texas">Texas</div>
+      <div class="chip active green" data-st="Florida">Florida</div>
+      <div class="chip active green" data-st="Arizona">Arizona</div>
+      <div class="chip green" data-st="California">California</div>
+      <div class="chip green" data-st="North Carolina">N. Carolina</div>
+      <div class="chip green" data-st="Georgia">Georgia</div>
+      <div class="chip green" data-st="Ohio">Ohio</div>
+      <div class="chip green" data-st="Colorado">Colorado</div>
+      <div class="chip green" data-st="Tennessee">Tennessee</div>
+      <div class="chip green" data-st="Nevada">Nevada</div>
+      <div class="chip green" data-st="Michigan">Michigan</div>
+      <div class="chip green" data-st="Washington">Washington</div>
+      <div class="chip green" data-st="Oklahoma">Oklahoma</div>
+      <div class="chip green" data-st="Louisiana">Louisiana</div>
+      <div class="chip green" data-st="New York">New York</div>
+    </div>
+
+    <div class="preview" id="discPreview">Select options above then tap Analyze.</div>
+    <button class="run-btn" id="discRun">🔍 Analyze Domains ↗</button>
+  </div>
+
+  <!-- TAB 1: ANALYZER -->
+  <div class="scroll" id="tabContent1" style="display:none">
+    <p style="font-size:13px;color:#374151;font-weight:500;line-height:1.6;margin-bottom:4px">Analyze any domain or keyword + city combination for commercial viability, resale potential, and outbound pitch.</p>
+
+    <p class="sec">Option A — Analyze a domain</p>
+    <input class="text-inp" id="anaInputDomain" type="text" placeholder="e.g. TampaRoofing.com" autocapitalize="none" spellcheck="false">
+
+    <p class="sec">Option B — Keyword + City + State</p>
+    <div class="two-col">
+      <div class="sel-wrap">
+        <select id="anaKwSel">
+          <option value="">— Keyword —</option>
+          <option>PersonalInjury</option><option>CarAccidentLawyer</option><option>DUI</option>
+          <option>ImmigrationLawyer</option><option>EstatePlanning</option><option>Roofing</option>
+          <option>RoofRepair</option><option>HVAC</option><option>WaterDamage</option>
+          <option>MoldTest</option><option>Plumbing</option><option>KitchenRemodel</option>
+          <option>SolarInstallation</option><option>SprayFoamInsulation</option>
+          <option>ManagedIT</option><option>ITSupport</option><option>ITSecurity</option>
+          <option>Cybersecurity</option><option>WeightLoss</option><option>MedSpa</option>
+          <option>Orthodontist</option><option>Dentist</option><option>SeniorLiving</option>
+          <option>PhysicalTherapy</option><option>PropertyManagement</option>
+          <option>CommercialRealEstate</option><option>AutoBody</option><option>Towing</option>
+        </select>
+      </div>
+      <input class="text-inp" id="anaCityInp" type="text" placeholder="City name">
+    </div>
+    <div class="sel-wrap">
+      <select id="anaStateSel">
+        <option value="">— State —</option>
+        <option>Alabama</option><option>Alaska</option><option>Arizona</option><option>Arkansas</option>
+        <option>California</option><option>Colorado</option><option>Connecticut</option><option>Florida</option>
+        <option>Georgia</option><option>Idaho</option><option>Illinois</option><option>Indiana</option>
+        <option>Iowa</option><option>Kansas</option><option>Kentucky</option><option>Louisiana</option>
+        <option>Maryland</option><option>Massachusetts</option><option>Michigan</option><option>Minnesota</option>
+        <option>Mississippi</option><option>Missouri</option><option>Montana</option><option>Nebraska</option>
+        <option>Nevada</option><option>New Jersey</option><option>New Mexico</option><option>New York</option>
+        <option>North Carolina</option><option>Ohio</option><option>Oklahoma</option><option>Oregon</option>
+        <option>Pennsylvania</option><option>South Carolina</option><option>Tennessee</option><option>Texas</option>
+        <option>Utah</option><option>Virginia</option><option>Washington</option><option>Wisconsin</option>
+      </select>
+    </div>
+    <button class="run-btn" id="anaRun" style="margin-top:14px">🧠 Analyze Now ↗</button>
+  </div>
+
+  <!-- TAB 2: SETTINGS -->
+  <div class="scroll" id="tabContent2" style="display:none">
+    <p class="sec">Anthropic API Key</p>
+    <div class="keybox">
+      <div class="keybox-lbl">Paste your key (starts with sk-ant-)</div>
+      <div class="keybox-row">
+        <input type="password" id="settingsKey" class="key-input" placeholder="sk-ant-api03-..." autocomplete="off" spellcheck="false">
+        <button class="key-save-btn" id="settingsSave">Save</button>
+      </div>
+      <div class="key-hint">Get free key → <a href="https://console.anthropic.com/settings/keys" target="_blank">console.anthropic.com</a></div>
+      <div class="key-ok" id="settingsOk">✓ Key saved successfully!</div>
+    </div>
+    <div style="background:#fff;border:1px solid #e5e7eb;border-radius:12px;padding:14px;margin-top:12px">
+      <div style="font-size:13px;font-weight:700;color:#111827;margin-bottom:6px">How it works</div>
+      <div style="font-size:13px;color:#374151;line-height:1.7;font-weight:500">Your API key is stored only on this device — never shared. Each analysis uses $0.02–0.05 of credit. A $5 top-up gives you 100–200 analyses. Monitor usage at console.anthropic.com.</div>
+    </div>
+  </div>
+</div>
+
+<!-- PAGE: LOADING -->
+<div class="page" id="pageLoad">
+  <div class="loader">
+    <div class="spin"></div>
+    <div class="loader-title" id="loadTitle">Analyzing...</div>
+    <div class="loader-sub" id="loadSub"></div>
+    <div class="loader-step" id="loadStep"></div>
+    <div class="prog-wrap"><div class="prog-bar" id="progBar"></div></div>
+  </div>
+</div>
+
+<!-- PAGE: DISCOVERY RESULTS -->
+<div class="page" id="pageResults">
+  <div class="res-hdr">
+    <div class="res-title" id="resTitle">Results</div>
+    <button class="back-btn" id="resBack">← Back</button>
+  </div>
+  <div class="scroll-nop">
+    <div class="stats-row" id="statsRow"></div>
+    <div class="insight" id="insightBox" style="display:none">
+      <div class="insight-title">🧠 Strategic Insights</div>
+      <div id="insightContent"></div>
+    </div>
+    <div class="res-tabs" id="resTabs"></div>
+    <div id="secContents"></div>
+  </div>
+</div>
+
+<!-- PAGE: ANALYZER RESULT -->
+<div class="page" id="pageAna">
+  <div class="res-hdr">
+    <div class="res-title" id="anaTitle">Domain Analysis</div>
+    <button class="back-btn" id="anaBack">← Back</button>
+  </div>
+  <div class="scroll">
+    <div id="anaContent"></div>
+  </div>
+</div>
+
+<!-- PAGE: ERROR -->
+<div class="page" id="pageError">
+  <div class="res-hdr">
+    <div class="res-title">Error</div>
+    <button class="back-btn" id="errBack">← Back</button>
+  </div>
+  <div class="error-box" id="errMsg"></div>
+</div>
+
+<!-- PAGE: PITCH -->
+<div class="page" id="pagePitch">
+  <div class="res-hdr">
+    <div class="res-title" id="pitchTitle">Pitch Emails</div>
+    <button class="back-btn" id="pitchBack">← Back</button>
+  </div>
+  <div class="scroll">
+    <div id="pitchContent">
+      <div class="loader"><div class="spin"></div><div class="loader-title">Writing emails...</div></div>
+    </div>
+  </div>
+</div>
+
+<script>
+'use strict';
+
+// ─── DATA ─────────────────────────────────────────────────────────────
+var CATS = {
+  legal:  { l:'Legal',        kws:'PersonalInjury,CarAccidentLawyer,DUI,ImmigrationLawyer,CriminalLawyer,EstatePlanning,Attorney,ElderLaw' },
+  home:   { l:'Home Svcs',    kws:'Roofing,RoofRepair,HVAC,WaterDamage,MoldTest,Plumbing,KitchenRemodel,SprayFoamInsulation,SolarInstallation,PestControl,Insulation,GutterCleaning,RestorationCompany,WindowReplacement' },
+  health: { l:'Health',       kws:'WeightLoss,MedSpa,Orthodontist,Dentist,PhysicalTherapy,SeniorLiving,BehavioralHealth,AddictionTreatment,Chiropractor,Dermatologist,MentalHealth' },
+  tech:   { l:'Tech & IT',    kws:'ManagedIT,ITSupport,ITSecurity,Cybersecurity,ITConsulting,MSP,DigitalMarketing' },
+  realestate:{ l:'Real Estate',kws:'CommercialRealEstate,PropertyManagement,Realty,CashHomeBuyers,Realtor' },
+  financial:{ l:'Financial',  kws:'TaxCpa,FinancialAdvisor,Accountant,Bookkeeping,BusinessBroker' },
+  auto:   { l:'Auto',         kws:'AutoBody,Autodetailing,Towing,JunkCars' },
+  solar:  { l:'Solar',        kws:'SolarInstallation,SolarPanel,SolarEnergy' }
+};
+
+var CITIES = {
+  Texas:       ['Houston','Dallas','Austin','San Antonio','Fort Worth','Plano','Frisco','McKinney'],
+  Florida:     ['Miami','Tampa','Jacksonville','Orlando','Fort Lauderdale','Cape Coral','Boca Raton','Sarasota','Naples'],
+  Arizona:     ['Phoenix','Scottsdale','Tucson','Mesa','Chandler','Gilbert','Surprise'],
+  California:  ['Los Angeles','San Diego','San Jose','Irvine','Sacramento','Riverside'],
+  'North Carolina':['Charlotte','Raleigh','Durham','Cary','Asheville'],
+  Georgia:     ['Atlanta','Savannah','Roswell','Sandy Springs'],
+  Ohio:        ['Columbus','Cleveland','Cincinnati','Akron'],
+  Colorado:    ['Denver','Colorado Springs','Boulder','Fort Collins'],
+  Tennessee:   ['Nashville','Memphis','Knoxville','Chattanooga'],
+  Nevada:      ['Las Vegas','Henderson','Reno'],
+  Michigan:    ['Detroit','Grand Rapids','Ann Arbor'],
+  Washington:  ['Seattle','Bellevue','Tacoma','Spokane'],
+  Oklahoma:    ['Oklahoma City','Tulsa'],
+  Louisiana:   ['New Orleans','Baton Rouge'],
+  'New York':  ['New York','Buffalo','Rochester']
+};
+
+var SKEYS  = ['top','resell','leadgen','undervalued','suburbs','midsize'];
+var SLBLS  = ['🏆 Value','⚡ Resell','🎯 Lead Gen','💎 Hidden','🏘 Suburbs','🌆 Mid-Cities'];
+var OUTLBLS= ['Top 20 Highest Value','Top 20 Fast Resell','Top 20 Best Lead Gen','Top 20 Undervalued','Wealthy Suburb Picks','Mid-Size City Picks'];
+
+var selKws    = new Set(['legal','home','health']);
+var selStates = new Set(['Texas','Florida','Arizona']);
+var selOut    = 0;
+var curTab    = 0;
+var lastData  = { results:{} };
+var lastR     = null;
+var pitchReturnPage = 'pageResults';
+
+// ─── UTILS ────────────────────────────────────────────────────────────
+function getKey() {
+  try { return localStorage.getItem('gdk') || ''; } catch(e) { return ''; }
+}
+function saveKey(v) {
+  try { localStorage.setItem('gdk', v); } catch(e) {}
+}
+function showPage(id) {
+  document.querySelectorAll('.page').forEach(function(p){ p.classList.remove('show'); });
+  document.getElementById(id).classList.add('show');
+  window.scrollTo(0,0);
+}
+function get(id) { return document.getElementById(id); }
+
+// ─── KEY UI ───────────────────────────────────────────────────────────
+function updateKeyUI() {
+  var k = getKey();
+  get('keyDot').className = 'key-dot' + (k ? ' on' : '');
+  get('keyTxt').textContent = k ? 'API key saved ✓' : 'No API key — add in Settings';
+  if (k) { get('settingsKey').value = k; get('overlayKey').value = k; }
+}
+
+// ─── OVERLAY ──────────────────────────────────────────────────────────
+get('overlaySave').addEventListener('click', function() {
+  var v = get('overlayKey').value.trim();
+  if (!v) { alert('Please paste your API key.'); return; }
+  if (!v.startsWith('sk-')) { alert('Key must start with sk-ant-\nGet it at console.anthropic.com'); return; }
+  saveKey(v);
+  updateKeyUI();
+  get('overlay').classList.add('hidden');
+});
+get('overlayKey').addEventListener('keydown', function(e) {
+  if (e.key === 'Enter') get('overlaySave').click();
+});
+
+// ─── SETTINGS SAVE ────────────────────────────────────────────────────
+get('settingsSave').addEventListener('click', function() {
+  var v = get('settingsKey').value.trim();
+  if (!v) { alert('Paste your API key first.'); return; }
+  if (!v.startsWith('sk-')) { alert('Key must start with sk-ant-\nGet it at console.anthropic.com'); return; }
+  saveKey(v);
+  updateKeyUI();
+  var ok = get('settingsOk');
+  ok.style.display = 'block';
+  setTimeout(function(){ ok.style.display = 'none'; }, 3000);
+});
+get('settingsKey').addEventListener('keydown', function(e) {
+  if (e.key === 'Enter') get('settingsSave').click();
+});
+
+// ─── MAIN TABS ────────────────────────────────────────────────────────
+get('mainTabs').addEventListener('click', function(e) {
+  var btn = e.target.closest('.tab-btn');
+  if (!btn) return;
+  var n = parseInt(btn.dataset.tab);
+  curTab = n;
+  document.querySelectorAll('.tab-btn').forEach(function(b){ b.classList.remove('active'); });
+  btn.classList.add('active');
+  ['tabContent0','tabContent1','tabContent2'].forEach(function(id, i){
+    get(id).style.display = (i === n) ? 'block' : 'none';
+  });
+});
+
+// ─── OUTPUT TYPE BUTTONS ──────────────────────────────────────────────
+get('outGrid').addEventListener('click', function(e) {
+  var btn = e.target.closest('.opt-btn');
+  if (!btn) return;
+  document.querySelectorAll('.opt-btn').forEach(function(b){ b.classList.remove('active'); });
+  btn.classList.add('active');
+  selOut = parseInt(btn.dataset.out);
+  updatePreview();
+});
+
+// ─── KW CHIPS ─────────────────────────────────────────────────────────
+get('kwChips').addEventListener('click', function(e) {
+  var chip = e.target.closest('.chip');
+  if (!chip) return;
+  var k = chip.dataset.kw;
+  if (selKws.has(k)) { selKws.delete(k); chip.classList.remove('active'); }
+  else { selKws.add(k); chip.classList.add('active'); }
+  updatePreview();
+});
+
+// ─── STATE CHIPS ──────────────────────────────────────────────────────
+get('stateChips').addEventListener('click', function(e) {
+  var chip = e.target.closest('.chip');
+  if (!chip) return;
+  var s = chip.dataset.st;
+  if (selStates.has(s)) { selStates.delete(s); chip.classList.remove('active'); }
+  else { selStates.add(s); chip.classList.add('active'); }
+  updatePreview();
+});
+
+// ─── PREVIEW ──────────────────────────────────────────────────────────
+function updatePreview() {
+  var cats = Array.from(selKws).map(function(k){ return CATS[k] ? CATS[k].l : k; }).join(', ') || 'none';
+  var states = Array.from(selStates).join(', ') || 'none';
+  get('discPreview').textContent = OUTLBLS[selOut] + ' · ' + cats + ' · ' + states;
+}
+
+// ─── BACK BUTTONS ─────────────────────────────────────────────────────
+get('resBack').addEventListener('click', function(){ showPage('pageHome'); });
+get('errBack').addEventListener('click', function(){ showPage('pageHome'); });
+get('anaBack').addEventListener('click', function(){ showPage('pageHome'); });
+get('pitchBack').addEventListener('click', function(){ showPage(pitchReturnPage); });
+
+// ─── RESULT TABS ──────────────────────────────────────────────────────
+get('resTabs').addEventListener('click', function(e) {
+  var btn = e.target.closest('.res-tab');
+  if (!btn) return;
+  document.querySelectorAll('.res-tab').forEach(function(b){ b.classList.remove('active'); });
+  document.querySelectorAll('.sec-content').forEach(function(c){ c.classList.remove('active'); });
+  btn.classList.add('active');
+  var tc = get('tc-' + btn.dataset.sk);
+  if (tc) tc.classList.add('active');
+});
+
+// ─── API CALL ─────────────────────────────────────────────────────────
+var SYS = 'You are an elite geo-domain investment analyst. Return ONLY raw JSON — no markdown, no code fences.\n\nCity matching rules:\n- ROOFING: Houston,Tampa,Dallas,Denver,Oklahoma City (storms,hail)\n- HVAC: Phoenix,Las Vegas,Dallas,Houston,Orlando (extreme heat)\n- WATER DAMAGE/MOLD: Tampa,Miami,Jacksonville,Houston,New Orleans,Portland,Seattle\n- SOLAR: Phoenix,Las Vegas,San Diego,Austin,Denver\n- PERSONAL INJURY/CAR ACCIDENT: Houston,Miami,Atlanta,Dallas,Los Angeles\n- SENIOR LIVING/MED SPA: Boca Raton,Naples,Sarasota,Scottsdale,Phoenix\n- WEIGHT LOSS: Miami,Scottsdale,Boca Raton,LA,San Diego\n- MANAGED IT/MSP: Seattle,Bellevue,Austin,Raleigh,Denver,Charlotte\n\nDomain format: CityKeyword.com or KeywordCity.com. Natural, no hyphens.\n\nFOR DISCOVERY JSON:\n{"results":{"SECTIONKEY":[15 entries]},"stats":{"total":15,"extreme":int,"avgCI":float,"premium":int},"insights":{"cities":["city: reason","city: reason"],"niches":["niche: reason","niche: reason"],"emerging":["opportunity"]},"buyNow":["d1","d2","d3","d4","d5"]}\n\nEach entry: {rank(int),domain,city,state,cat,why(max 18 words),demand("Low"|"Medium"|"High"|"Extreme"),ci(int 1-10),seo(int 1-10),lg(int 1-10),brand(int 1-10),resale,avail("High"|"Moderate"|"Low"),ext(array 2 strings),vars(array 2 strings)}\n\nFOR ANALYZER JSON:\n{domain,city,state,cat,verdict(1 sentence),why(2 sentences),drivers,ci,seo,lg,brand,trust,cpc,competition,buyerPool,flipProb,outboundProb,resale,spendHeavily,natural,seoAligned,alts(array 3 strings),works(array of strings)}';
+
+async function callAPI(msg, tokens) {
+  var key = getKey();
+  var resp = await fetch('https://api.anthropic.com/v1/messages', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'x-api-key': key,
+      'anthropic-version': '2023-06-01',
+      'anthropic-dangerous-direct-browser-access': 'true'
+    },
+    body: JSON.stringify({
+      model: 'claude-sonnet-4-5',
+      max_tokens: tokens,
+      system: SYS,
+      messages: [{ role: 'user', content: msg }]
+    })
+  });
+  if (!resp.ok) {
+    var j = await resp.json().catch(function(){ return {}; });
+    throw new Error(j.error ? j.error.message : 'API error ' + resp.status);
+  }
+  var data = await resp.json();
+  return (data.content || []).map(function(b){ return b.text || ''; }).join('').trim();
+}
+
+function parseJSON(raw) {
+  raw = raw.replace(/^```[a-z]*\n?/, '').replace(/```$/, '').trim();
+  var s = raw.indexOf('{');
+  var e = raw.lastIndexOf('}');
+  if (s === -1 || e === -1) throw new Error('No JSON in response. Try fewer filters.');
+  raw = raw.substring(s, e + 1);
+  try { return JSON.parse(raw); }
+  catch(err) { throw new Error('Response cut off. Select fewer categories or states.'); }
+}
+
+// ─── PROGRESS ─────────────────────────────────────────────────────────
+var PROGS = [
+  ['Mapping local economic signals…', 15],
+  ['Cross-referencing climate & demographics…', 32],
+  ['Scoring advertiser competition…', 50],
+  ['Estimating resale & buyer pools…', 68],
+  ['Building domain rankings…', 85]
+];
+
+// ─── DISCOVERY ────────────────────────────────────────────────────────
+get('discRun').addEventListener('click', function() {
+  if (!getKey()) { alert('Add your API key in the Settings tab first.'); return; }
+  if (!selKws.size || !selStates.size) { alert('Pick at least one category and one state.'); return; }
+  runDiscovery();
+});
+
+async function runDiscovery() {
+  showPage('pageLoad');
+  var pi = 0;
+  var pt = setInterval(function() {
+    var step = PROGS[pi % PROGS.length];
+    get('loadSub').textContent = step[0];
+    get('progBar').style.width = step[1] + '%';
+    pi++;
+  }, 2400);
+
+  var kwList = Array.from(selKws).reduce(function(a, k){ return a.concat((CATS[k].kws || '').split(',')); }, []);
+  var cityList = Array.from(selStates).reduce(function(a, s){ return a.concat((CITIES[s] || []).map(function(c){ return c + ', ' + s; })); }, []);
+  var focusKey = SKEYS[selOut];
+
+  get('loadTitle').textContent = 'Analyzing ' + cityList.length + ' cities × ' + kwList.length + ' keywords…';
+  get('loadStep').textContent = 'Usually 20–35 seconds';
+
+  var prompt = 'DISCOVERY — ONE SECTION ONLY: "' + focusKey + '" with 15 entries.\n'
+    + 'Also include stats, insights, buyNow.\n\n'
+    + 'Cities: ' + cityList.slice(0,20).join(' | ') + '\n'
+    + 'Keywords: ' + kwList.slice(0,20).join(',') + '\n\n'
+    + 'JSON key for results must be: "' + focusKey + '"\n'
+    + 'Keep each "why" under 18 words. Real city-keyword matching only.';
+
+  try {
+    var raw = await callAPI(prompt, 3500);
+    clearInterval(pt);
+    get('progBar').style.width = '100%';
+    var parsed = parseJSON(raw);
+    if (!parsed.results) parsed.results = {};
+    SKEYS.forEach(function(k){ if (!parsed.results[k]) parsed.results[k] = []; });
+    lastData = parsed;
+    renderDiscovery(parsed, focusKey);
+  } catch(err) {
+    clearInterval(pt);
+    get('errMsg').textContent = 'Error: ' + err.message;
+    showPage('pageError');
+  }
+}
+
+function renderDiscovery(d, focusKey) {
+  var s = d.stats || {};
+  get('resTitle').textContent = OUTLBLS[selOut];
+  get('statsRow').innerHTML =
+    stat(s.total || 0, 'Domains') +
+    stat(s.extreme || 0, 'Extreme') +
+    stat(typeof s.avgCI === 'number' ? s.avgCI.toFixed(1) : '—', 'Avg CI') +
+    stat(s.premium || 0, 'Premium');
+
+  var ins = d.insights || {};
+  var ih = '';
+  (ins.cities || []).slice(0,2).forEach(function(i){ ih += '<div class="insight-item">🏙 ' + i + '</div>'; });
+  (ins.niches || []).slice(0,2).forEach(function(i){ ih += '<div class="insight-item">🎯 ' + i + '</div>'; });
+  (ins.emerging || []).slice(0,1).forEach(function(i){ ih += '<div class="insight-item">🚀 ' + i + '</div>'; });
+  if (d.buyNow && d.buyNow.length) ih += '<div class="insight-item">🛒 Buy Now: ' + d.buyNow.slice(0,5).join(', ') + '</div>';
+  if (ih) { get('insightContent').innerHTML = ih; get('insightBox').style.display = 'block'; }
+  else { get('insightBox').style.display = 'none'; }
+
+  var tabsHtml = SKEYS.map(function(k, i){
+    return '<button class="res-tab' + (k === focusKey ? ' active' : '') + '" data-sk="' + k + '">' + SLBLS[i] + '</button>';
+  }).join('');
+  get('resTabs').innerHTML = tabsHtml;
+
+  var contHtml = SKEYS.map(function(k, i){
+    var rows = d.results[k] || [];
+    var isActive = k === focusKey;
+    var inner;
+    if (rows.length) {
+      inner = '<div class="cards">' + rows.map(function(r, idx){ return buildCard(r, idx, k); }).join('') + '</div>';
+    } else if (isActive) {
+      inner = '<div class="no-data">No results returned. Please try again.</div>';
+    } else {
+      inner = '<div class="load-sec"><p>Tap to load ' + SLBLS[i] + ' results</p><button class="load-sec-btn" onclick="loadSection(\'' + k + '\',' + i + ')">Load ' + SLBLS[i] + ' ↗</button></div>';
+    }
+    return '<div class="sec-content' + (isActive ? ' active' : '') + '" id="tc-' + k + '">' + inner + '</div>';
+  }).join('');
+  get('secContents').innerHTML = contHtml;
+
+  bindPitchButtons();
+  showPage('pageResults');
+}
+
+function stat(v, l) {
+  return '<div class="stat"><div class="stat-v">' + v + '</div><div class="stat-l">' + l + '</div></div>';
+}
+
+function buildCard(r, i, sec) {
+  var dmap = { Extreme:'d-extreme', High:'d-high', Medium:'d-medium', Low:'d-low' };
+  var amap = { High:'av-h', Moderate:'av-m', Low:'av-l' };
+  var rkCls = r.rank <= 3 ? 'gold' : r.rank <= 8 ? 'blue' : '';
+  var ext = Array.isArray(r.ext) ? r.ext.join(' ') : '.com .net';
+  var vars = Array.isArray(r.vars) ? r.vars.map(function(v){ return '<span class="var-pill">' + v + '</span>'; }).join('') : '';
+  var top5 = (r.rank || i+1) <= 5;
+  return '<div class="card">'
+    + '<div class="card-top">'
+    + '<div class="rank ' + rkCls + '">' + (r.rank || i+1) + '</div>'
+    + '<div class="card-info">'
+    + '<div class="card-domain">' + (r.domain || '') + '</div>'
+    + '<div class="card-meta">' + (r.city || '') + ', ' + (r.state || '') + ' · ' + (r.cat || '') + ' · ' + ext + '</div>'
+    + '</div>'
+    + '<span class="demand ' + (dmap[r.demand] || 'd-medium') + '">' + (r.demand || '') + '</span>'
+    + '</div>'
+    + '<div class="card-why">' + (r.why || '') + '</div>'
+    + '<div class="card-foot">'
+    + '<div class="scores">'
+    + '<div class="score"><div class="score-v">' + (r.ci||'—') + '</div><div class="score-l">CI</div></div>'
+    + '<div class="score"><div class="score-v">' + (r.seo||'—') + '</div><div class="score-l">SEO</div></div>'
+    + '<div class="score"><div class="score-v">' + (r.lg||'—') + '</div><div class="score-l">LG</div></div>'
+    + '<div class="score"><div class="score-v">' + (r.brand||'—') + '</div><div class="score-l">Brand</div></div>'
+    + '</div>'
+    + '<span class="resale">' + (r.resale || '—') + '</span>'
+    + '<span class="avail ' + (amap[r.avail] || 'av-m') + '">' + (r.avail || '?') + '</span>'
+    + '</div>'
+    + (vars ? '<div class="card-vars">' + vars + '</div>' : '')
+    + (top5 ? '<button class="pitch-btn" data-dom="' + (r.domain||'') + '" data-sec="' + sec + '">✉️ Generate Cold Pitch Emails →</button>' : '')
+    + '</div>';
+}
+
+function bindPitchButtons() {
+  document.querySelectorAll('.pitch-btn').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      var dom = this.dataset.dom;
+      var sec = this.dataset.sec;
+      var rows = (lastData.results[sec] || []);
+      var r = rows.find(function(x){ return x.domain === dom; });
+      if (r) { lastR = r; pitchReturnPage = 'pageResults'; runPitch(r); }
+    });
+  });
+}
+
+// ─── LOAD SECTION ON DEMAND ───────────────────────────────────────────
+window.loadSection = async function(key, idx) {
+  var tc = get('tc-' + key);
+  if (!tc) return;
+  tc.innerHTML = '<div class="loader" style="min-height:120px"><div class="spin"></div><div class="loader-title" style="font-size:13px">Loading ' + SLBLS[idx] + '…</div></div>';
+
+  var kwList = Array.from(selKws).reduce(function(a,k){ return a.concat((CATS[k].kws||'').split(',')); }, []);
+  var cityList = Array.from(selStates).reduce(function(a,s){ return a.concat((CITIES[s]||[]).map(function(c){ return c+', '+s; })); }, []);
+
+  var prompt = 'DISCOVERY — ONE SECTION ONLY: "' + key + '" with 15 entries.\n'
+    + 'Cities: ' + cityList.slice(0,20).join(' | ') + '\n'
+    + 'Keywords: ' + kwList.slice(0,20).join(',') + '\n'
+    + 'JSON: {"results":{"' + key + '":[...15 entries...]}}\n'
+    + 'Each entry: {rank,domain,city,state,cat,why(max 18 words),demand,ci,seo,lg,brand,resale,avail,ext,vars}\n'
+    + 'Real matching only. Keep why under 18 words.';
+
+  try {
+    var raw = await callAPI(prompt, 3000);
+    var parsed = parseJSON(raw);
+    var rows = ((parsed.results || {})[key]) || [];
+    if (!lastData.results) lastData.results = {};
+    lastData.results[key] = rows;
+    tc.innerHTML = rows.length
+      ? '<div class="cards">' + rows.map(function(r,i){ return buildCard(r,i,key); }).join('') + '</div>'
+      : '<div class="no-data">No results for this section.</div>';
+    bindPitchButtons();
+  } catch(err) {
+    tc.innerHTML = '<div class="no-data" style="color:#7f1d1d">Error: ' + err.message + '</div>';
+  }
+};
+
+// ─── ANALYZER ─────────────────────────────────────────────────────────
+get('anaRun').addEventListener('click', function() {
+  if (!getKey()) { alert('Add your API key in the Settings tab first.'); return; }
+  var domInput = get('anaInputDomain').value.trim();
+  var kw = get('anaKwSel').value;
+  var city = get('anaCityInp').value.trim();
+  var state = get('anaStateSel').value;
+  var subject = '';
+  if (domInput) { subject = domInput; }
+  else if (kw && city && state) { subject = city + kw + '.com (' + city + ', ' + state + ')'; }
+  else { alert('Enter a domain name OR select a keyword + city + state.'); return; }
+  runAnalyzer(subject, kw, city, state);
+});
+
+async function runAnalyzer(subject, kw, city, state) {
+  showPage('pageLoad');
+  get('loadTitle').textContent = 'Analyzing ' + subject + '…';
+  get('loadSub').textContent = 'Scoring commercial viability, SEO, resale…';
+  get('loadStep').textContent = 'Usually 10–15 seconds';
+  get('progBar').style.width = '40%';
+
+  var prompt = 'ANALYZER MODE. Analyze: ' + subject + '\n'
+    + (kw ? 'Keyword: ' + kw + '\n' : '')
+    + (city ? 'City: ' + city + '\n' : '')
+    + (state ? 'State: ' + state + '\n' : '')
+    + '\nReturn analyzer JSON with all fields. Include 3 better alternative domains in alts array.';
+
+  try {
+    var raw = await callAPI(prompt, 2000);
+    get('progBar').style.width = '100%';
+    var parsed = parseJSON(raw);
+    lastR = { domain: parsed.domain, city: parsed.city, state: parsed.state, cat: parsed.cat, why: parsed.why, resale: parsed.resale };
+    get('anaTitle').textContent = parsed.domain || subject;
+    renderAnalyzer(parsed);
+    pitchReturnPage = 'pageAna';
+    showPage('pageAna');
+  } catch(err) {
+    get('errMsg').textContent = 'Error: ' + err.message;
+    showPage('pageError');
+  }
+}
+
+function renderAnalyzer(d) {
+  var cpc = { Low:'mp-blue', Medium:'mp-amber', High:'mp-green', Extreme:'mp-green' };
+  var prob = { Low:'mp-amber', Medium:'mp-blue', High:'mp-green' };
+  var works = Array.isArray(d.works) ? d.works.map(function(w){ return '<span class="meta-pill mp-blue">'+w+'</span>'; }).join('') : '';
+  var alts = Array.isArray(d.alts) ? d.alts.map(function(a){ return '<div class="alt-dom">'+a+'</div>'; }).join('') : '';
+
+  get('anaContent').innerHTML =
+    '<div class="ana-result">'
+    + '<div class="ana-head">'
+    + '<div class="ana-domain">' + (d.domain||'') + '</div>'
+    + '<div class="ana-sub">' + (d.city||'') + (d.state?', '+d.state:'') + (d.cat?' · '+d.cat:'') + '</div>'
+    + '</div>'
+    + '<div class="ana-body">'
+    + '<div class="score-grid">'
+    + sg(d.ci,'CI') + sg(d.seo,'SEO') + sg(d.lg,'LG') + sg(d.brand,'Brand') + sg(d.trust,'Trust')
+    + '</div>'
+    + '<div class="section-title">Verdict</div>'
+    + '<div class="verdict">' + (d.verdict||'') + '</div>'
+    + '<div class="section-title">Analysis</div>'
+    + '<div class="why-text">' + (d.why||'') + '</div>'
+    + (d.drivers ? '<div class="why-text" style="color:#6b7280;margin-top:6px;font-style:italic">' + d.drivers + '</div>' : '')
+    + '<hr class="sep">'
+    + '<div class="meta-wrap">'
+    + mp('CPC: '+(d.cpc||'?'), cpc[d.cpc]||'mp-blue')
+    + mp('Competition: '+(d.competition||'?'), cpc[d.competition]||'mp-blue')
+    + mp('Buyers: '+(d.buyerPool||'?'), 'mp-purple')
+    + mp('Flip: '+(d.flipProb||'?'), prob[d.flipProb]||'mp-amber')
+    + mp('Outbound: '+(d.outboundProb||'?'), prob[d.outboundProb]||'mp-amber')
+    + (d.spendHeavily ? mp('Heavy ad spenders ✓','mp-green') : '')
+    + (d.natural ? mp('Natural wording ✓','mp-green') : mp('Awkward wording ✗','mp-amber'))
+    + (d.seoAligned ? mp('SEO aligned ✓','mp-green') : '')
+    + '</div>'
+    + (works ? '<div class="meta-wrap" style="margin-top:6px">' + works + '</div>' : '')
+    + '<hr class="sep">'
+    + '<div class="section-title">Resale Estimate</div>'
+    + '<div style="font-size:18px;font-weight:800;color:#111827;margin-bottom:12px">' + (d.resale||'—') + '</div>'
+    + (alts ? '<div class="section-title">Better Alternatives</div><div class="alts">' + alts + '</div>' : '')
+    + '<button class="run-btn" style="margin-top:16px" onclick="if(lastR)runPitch(lastR)">✉️ Generate Cold Pitch Emails →</button>'
+    + '</div></div>';
+}
+
+function sg(v, l) {
+  return '<div class="sg"><div class="sg-v">' + (v||'—') + '</div><div class="sg-l">' + l + '</div></div>';
+}
+function mp(txt, cls) {
+  return '<span class="meta-pill ' + cls + '">' + txt + '</span>';
+}
+
+// ─── PITCH ────────────────────────────────────────────────────────────
+window.runPitch = async function(r) {
+  get('pitchTitle').textContent = r.domain || 'Pitch Emails';
+  get('pitchContent').innerHTML = '<div class="loader"><div class="spin"></div><div class="loader-title">Writing emails…</div></div>';
+  showPage('pagePitch');
+
+  var prompt = 'Write 3 cold outbound emails to sell the domain ' + (r.domain||'this domain') + '.\n'
+    + 'Context: ' + (r.why||'strong local demand') + '\n'
+    + 'Niche: ' + (r.cat||'local service') + ' in ' + (r.city||'city') + ', ' + (r.state||'state') + '\n'
+    + 'Target resale: ' + (r.resale||'$1,000–$3,000') + '\n\n'
+    + 'Return JSON only (no markdown):\n'
+    + '{"emails":[{"label":"Email 1 — Day 1","subject":"...","body":"..."},{"label":"Email 2 — Day 4","subject":"...","body":"..."},{"label":"Email 3 — Day 10","subject":"...","body":"..."}]}\n'
+    + 'Each under 130 words. Conversational. 1 local detail each. Day 10 = urgency (listing on Afternic/Sedo soon).';
+
+  try {
+    var raw = await callAPI(prompt, 2000);
+    var parsed = parseJSON(raw);
+    var emails = parsed.emails || [];
+
+    var html = '<div style="font-size:13px;color:#374151;font-weight:600;margin-bottom:14px;line-height:1.5">'
+      + '3-email sequence for <strong style="color:#111827">' + (r.domain||'') + '</strong><br>'
+      + (r.cat||'') + ' · ' + (r.city||'') + ', ' + (r.state||'') + ' · ' + (r.resale||'') + '</div>';
+
+    emails.forEach(function(e, i) {
+      var subj = (e.subject||'').replace(/"/g,"'");
+      var body = (e.body||'').replace(/"/g,"'");
+      html += '<div class="email-card">'
+        + '<div class="email-day">' + (e.label||'Email '+(i+1)) + '</div>'
+        + '<div class="email-sub">Subject: ' + (e.subject||'') + '</div>'
+        + '<div class="email-body">' + (e.body||'') + '</div>'
+        + '<button class="copy-btn" onclick="copyEmail(this,\'Subject: ' + subj + '\\n\\n' + body + '\')">Copy Email</button>'
+        + '</div>';
+    });
+
+    html += '<div class="tip"><strong>🎯 Workflow:</strong> LinkedIn → find owner/CEO → grab website → verify email at Hunter.io → send sequence. Target: 5–50 employee firms spending on Google Ads.</div>';
+    get('pitchContent').innerHTML = html;
+
+  } catch(err) {
+    get('pitchContent').innerHTML = '<div class="error-box">Error: ' + err.message + '</div>';
+  }
+};
+
+window.copyEmail = function(btn, text) {
+  navigator.clipboard.writeText(text).then(function() {
+    btn.textContent = '✓ Copied!';
+    setTimeout(function(){ btn.textContent = 'Copy Email'; }, 2000);
+  });
+};
+
+// ─── PWA MANIFEST ─────────────────────────────────────────────────────
+(function() {
+  var m = { name:'GeoDomain Pro', short_name:'GeoDomain', start_url:'./', display:'standalone', background_color:'#1e40af', theme_color:'#1a56db', orientation:'portrait' };
+  var blob = new Blob([JSON.stringify(m)], { type:'application/manifest+json' });
+  var link = document.createElement('link');
+  link.rel = 'manifest';
+  link.href = URL.createObjectURL(blob);
+  document.head.appendChild(link);
+})();
+
+// ─── BOOT ─────────────────────────────────────────────────────────────
+updateKeyUI();
+updatePreview();
+if (getKey()) { get('overlay').classList.add('hidden'); }
+</script>
+</body>
+</html>
