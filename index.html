@@ -10,31 +10,25 @@
 * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: rgba(0,0,0,0); }
 body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #f3f4f6; color: #111827; min-height: 100vh; font-size: 14px; }
 
-/* PAGES */
 .page { display: none; min-height: 100vh; flex-direction: column; }
 .page.show { display: flex; }
 
-/* HEADER */
 .hdr { background: linear-gradient(135deg, #1e40af, #1a56db); padding: 16px; padding-top: calc(16px + env(safe-area-inset-top)); color: #fff; }
 .hdr-row { display: flex; align-items: center; justify-content: space-between; margin-bottom: 4px; }
 .hdr h1 { font-size: 18px; font-weight: 700; }
 .hdr p { font-size: 12px; color: rgba(255,255,255,0.8); }
 .badge { background: rgba(255,255,255,0.2); padding: 3px 9px; border-radius: 20px; font-size: 11px; font-weight: 600; color: #fff; }
 
-/* TABS */
 .tabs { display: flex; background: rgba(0,0,0,0.15); border-radius: 10px; margin-top: 12px; padding: 3px; }
-.tab-btn { flex: 1; padding: 7px 4px; font-size: 12px; font-weight: 600; color: rgba(255,255,255,0.7); background: none; border: none; border-radius: 8px; cursor: pointer; font-family: inherit; transition: all 0.2s; }
+.tab-btn { flex: 1; padding: 7px 3px; font-size: 11px; font-weight: 600; color: rgba(255,255,255,0.7); background: none; border: none; border-radius: 8px; cursor: pointer; font-family: inherit; transition: all 0.2s; }
 .tab-btn.active { background: #fff; color: #1a56db; }
 
-/* SCROLL BODY */
 .scroll { flex: 1; overflow-y: auto; padding: 16px; }
 .scroll-nop { flex: 1; overflow-y: auto; }
 
-/* SECTION LABEL */
 .sec { font-size: 11px; font-weight: 700; color: #6b7280; text-transform: uppercase; letter-spacing: 0.06em; margin: 16px 0 6px; }
 .sec:first-child { margin-top: 0; }
 
-/* KEY BOX */
 .keybox { background: #fff; border-radius: 12px; padding: 14px; border: 1px solid #e5e7eb; }
 .keybox-lbl { font-size: 13px; color: #374151; margin-bottom: 8px; font-weight: 500; }
 .keybox-row { display: flex; gap: 8px; }
@@ -50,25 +44,21 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; b
 .key-dot.on { background: #10b981; }
 .key-status-txt { font-size: 12px; color: rgba(255,255,255,0.9); }
 
-/* OPTION GRID */
 .opt-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
 .opt-btn { padding: 9px 8px; border: 1.5px solid #d1d5db; border-radius: 9px; font-size: 12px; font-weight: 500; color: #374151; background: #fff; cursor: pointer; text-align: center; font-family: inherit; }
 .opt-btn.active { background: #eff6ff; border-color: #1a56db; color: #1e40af; font-weight: 700; }
 
-/* CHIPS */
 .chip-wrap { display: flex; flex-wrap: wrap; gap: 6px; }
 .chip { padding: 7px 13px; border: 1.5px solid #d1d5db; border-radius: 20px; font-size: 13px; font-weight: 500; color: #374151; background: #fff; cursor: pointer; user-select: none; }
 .chip.active { background: #eff6ff; border-color: #1a56db; color: #1e40af; font-weight: 700; }
 .chip.active.green { background: #f0fdf4; border-color: #059669; color: #065f46; }
+.chip.active.purple { background: #f5f3ff; border-color: #7c3aed; color: #4c1d95; }
 
-/* PREVIEW */
 .preview { background: #fff; border: 1px solid #e5e7eb; border-radius: 8px; padding: 10px 12px; font-size: 12px; color: #374151; line-height: 1.5; margin-top: 8px; min-height: 36px; }
 
-/* RUN BUTTON */
 .run-btn { width: 100%; padding: 14px; background: linear-gradient(135deg, #1e40af, #1a56db); color: #fff; border: none; border-radius: 12px; font-size: 15px; font-weight: 700; cursor: pointer; margin-top: 16px; font-family: inherit; box-shadow: 0 4px 12px rgba(26,86,219,0.3); }
 .run-btn:active { transform: scale(0.98); background: #1e40af; }
 
-/* LOADER */
 .loader { display: flex; flex-direction: column; align-items: center; justify-content: center; flex: 1; gap: 12px; padding: 40px 20px; }
 .spin { width: 40px; height: 40px; border: 3px solid #e5e7eb; border-top-color: #1a56db; border-radius: 50%; animation: spin 0.8s linear infinite; }
 @keyframes spin { to { transform: rotate(360deg); } }
@@ -78,96 +68,113 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; b
 .prog-wrap { width: 70%; background: #e5e7eb; border-radius: 4px; height: 4px; }
 .prog-bar { height: 4px; background: #1a56db; border-radius: 4px; width: 5%; transition: width 0.4s; }
 
-/* RESULT HEADER */
 .res-hdr { display: flex; align-items: center; justify-content: space-between; padding: 14px 16px 8px; background: #fff; border-bottom: 1px solid #e5e7eb; }
 .res-title { font-size: 16px; font-weight: 700; color: #111827; }
 .back-btn { padding: 7px 14px; background: #f3f4f6; border: 1.5px solid #d1d5db; border-radius: 20px; font-size: 13px; font-weight: 600; cursor: pointer; color: #374151; font-family: inherit; }
 .back-btn:active { background: #e5e7eb; }
 
-/* STATS */
 .stats-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; padding: 12px 16px; }
 .stat { background: #fff; border-radius: 10px; padding: 10px 6px; text-align: center; border: 1px solid #e5e7eb; }
 .stat-v { font-size: 20px; font-weight: 800; color: #111827; }
 .stat-l { font-size: 10px; color: #6b7280; text-transform: uppercase; font-weight: 600; letter-spacing: 0.04em; }
 
-/* INSIGHT BOX */
 .insight { background: linear-gradient(135deg, #eef2ff, #eff6ff); border: 1px solid #c7d2fe; border-radius: 12px; padding: 12px 14px; margin: 0 16px 12px; }
 .insight-title { font-size: 11px; font-weight: 700; color: #3730a3; text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 6px; }
 .insight-item { font-size: 12px; color: #1f2937; padding: 3px 0; border-bottom: 1px solid rgba(0,0,0,0.06); line-height: 1.5; font-weight: 500; }
 .insight-item:last-child { border-bottom: none; }
 
-/* RESULT TABS */
 .res-tabs { display: flex; overflow-x: auto; padding: 0 16px; border-bottom: 1px solid #e5e7eb; background: #fff; }
 .res-tabs::-webkit-scrollbar { display: none; }
 .res-tab { padding: 10px 14px; font-size: 12px; font-weight: 600; color: #6b7280; white-space: nowrap; cursor: pointer; border-bottom: 2px solid transparent; background: none; border-top: none; border-left: none; border-right: none; font-family: inherit; flex-shrink: 0; }
 .res-tab.active { color: #1a56db; border-bottom-color: #1a56db; }
 
-/* SECTION CONTENT */
 .sec-content { display: none; }
 .sec-content.active { display: block; }
 
-/* CARDS */
 .cards { padding: 12px 16px 80px; display: flex; flex-direction: column; gap: 10px; }
 .card { background: #fff; border-radius: 12px; border: 1px solid #e5e7eb; overflow: hidden; }
-.card-top { padding: 12px 14px 10px; display: flex; align-items: flex-start; gap: 10px; }
+.card-top { padding: 12px 14px 8px; display: flex; align-items: flex-start; gap: 10px; }
 .rank { width: 26px; height: 26px; border-radius: 50%; background: #f3f4f6; font-size: 11px; font-weight: 800; color: #6b7280; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
 .rank.gold { background: #fef3c7; color: #92400e; }
 .rank.blue { background: #eff6ff; color: #1e40af; }
 .card-info { flex: 1; min-width: 0; }
-.card-domain { font-size: 14px; font-weight: 800; color: #1a56db; font-family: 'Courier New', monospace; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.card-domain { font-size: 15px; font-weight: 800; color: #1a56db; font-family: 'Courier New', monospace; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .card-meta { font-size: 11px; color: #4b5563; margin-top: 2px; font-weight: 600; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .demand { padding: 3px 9px; border-radius: 20px; font-size: 11px; font-weight: 700; flex-shrink: 0; text-transform: uppercase; }
 .d-extreme { background: #dcfce7; color: #14532d; }
 .d-high { background: #d1fae5; color: #065f46; }
 .d-medium { background: #fef3c7; color: #78350f; }
 .d-low { background: #f3f4f6; color: #374151; }
-.card-why { padding: 0 14px 10px; font-size: 12px; color: #1f2937; line-height: 1.6; font-weight: 500; border-bottom: 1px solid #f3f4f6; }
-.card-foot { padding: 10px 14px; display: flex; flex-wrap: wrap; gap: 8px; align-items: center; justify-content: space-between; }
-.scores { display: flex; gap: 10px; }
+.card-why { padding: 0 14px 8px; font-size: 12px; color: #1f2937; line-height: 1.6; font-weight: 500; }
+.card-scores { padding: 0 14px 8px; display: flex; gap: 12px; border-bottom: 1px solid #f3f4f6; }
 .score { text-align: center; }
-.score-v { font-size: 15px; font-weight: 800; color: #111827; }
+.score-v { font-size: 16px; font-weight: 800; color: #111827; }
 .score-l { font-size: 9px; color: #6b7280; text-transform: uppercase; font-weight: 700; letter-spacing: 0.04em; }
+.card-meta2 { padding: 8px 14px; display: flex; flex-wrap: wrap; gap: 5px; border-bottom: 1px solid #f3f4f6; }
+.card-foot { padding: 8px 14px; display: flex; flex-wrap: wrap; gap: 8px; align-items: center; justify-content: space-between; }
+.mpill { font-size: 11px; font-weight: 600; padding: 3px 9px; border-radius: 20px; }
+.mp-blue { background: #eff6ff; color: #1e40af; }
+.mp-green { background: #dcfce7; color: #14532d; }
+.mp-amber { background: #fef3c7; color: #78350f; }
+.mp-purple { background: #ede9fe; color: #4c1d95; }
+.mp-red { background: #fee2e2; color: #7f1d1d; }
+.mp-gray { background: #f3f4f6; color: #374151; }
 .resale { font-size: 12px; font-weight: 700; background: #f3f4f6; padding: 4px 10px; border-radius: 20px; color: #111827; }
 .avail { font-size: 11px; padding: 3px 9px; border-radius: 20px; font-weight: 700; }
 .av-h { background: #dcfce7; color: #14532d; }
 .av-m { background: #fef3c7; color: #78350f; }
 .av-l { background: #fee2e2; color: #7f1d1d; }
-.card-vars { padding: 0 14px 10px; display: flex; flex-wrap: wrap; gap: 4px; }
-.var-pill { font-size: 11px; background: #f3f4f6; padding: 3px 9px; border-radius: 20px; color: #374151; font-weight: 500; }
+.card-vars { padding: 0 14px 8px; display: flex; flex-wrap: wrap; gap: 4px; }
+.var-pill { font-size: 11px; background: #f3f4f6; padding: 3px 9px; border-radius: 20px; color: #374151; font-weight: 500; font-family: 'Courier New', monospace; }
 .pitch-btn { width: 100%; padding: 11px; background: #f0f7ff; border: none; border-top: 1px solid #e5e7eb; font-size: 13px; font-weight: 700; color: #1a56db; cursor: pointer; font-family: inherit; border-radius: 0 0 12px 12px; }
 .pitch-btn:active { background: #dbeafe; }
 
-/* LOAD BTN */
 .load-sec { padding: 24px 16px; text-align: center; }
 .load-sec p { font-size: 13px; color: #6b7280; margin-bottom: 12px; font-weight: 500; }
 .load-sec-btn { padding: 11px 28px; background: linear-gradient(135deg, #1e40af, #1a56db); color: #fff; border: none; border-radius: 10px; font-size: 13px; font-weight: 700; cursor: pointer; font-family: inherit; }
 .load-sec-btn:active { background: #1e40af; }
 
-/* ERROR */
 .error-box { margin: 16px; background: #fee2e2; border: 1px solid #fca5a5; border-radius: 12px; padding: 14px; font-size: 13px; color: #7f1d1d; line-height: 1.6; font-weight: 500; }
 
-/* ANALYZER */
 .ana-result { background: #fff; border-radius: 12px; border: 1px solid #e5e7eb; overflow: hidden; margin-bottom: 12px; }
 .ana-head { background: linear-gradient(135deg, #1e40af, #1a56db); padding: 14px; color: #fff; }
-.ana-domain { font-size: 18px; font-weight: 800; font-family: 'Courier New', monospace; }
+.ana-domain { font-size: 20px; font-weight: 800; font-family: 'Courier New', monospace; }
 .ana-sub { font-size: 12px; color: rgba(255,255,255,0.8); margin-top: 3px; font-weight: 500; }
 .ana-body { padding: 14px; }
 .score-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px; margin-bottom: 14px; }
 .sg { background: #f9fafb; border-radius: 10px; padding: 10px 4px; text-align: center; border: 1px solid #e5e7eb; }
 .sg-v { font-size: 20px; font-weight: 800; color: #111827; }
 .sg-l { font-size: 10px; color: #6b7280; text-transform: uppercase; font-weight: 700; letter-spacing: 0.03em; }
-.section-title { font-size: 11px; font-weight: 700; color: #6b7280; text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 6px; }
+.section-title { font-size: 11px; font-weight: 700; color: #6b7280; text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 6px; margin-top: 14px; }
+.section-title:first-child { margin-top: 0; }
 .verdict { font-size: 14px; font-weight: 700; color: #111827; line-height: 1.5; margin-bottom: 10px; }
 .why-text { font-size: 13px; color: #1f2937; line-height: 1.6; font-weight: 500; }
 .sep { border: none; border-top: 1px solid #f3f4f6; margin: 12px 0; }
 .meta-wrap { display: flex; flex-wrap: wrap; gap: 6px; }
 .meta-pill { font-size: 12px; font-weight: 600; padding: 4px 10px; border-radius: 20px; }
-.mp-blue { background: #eff6ff; color: #1e40af; }
-.mp-green { background: #dcfce7; color: #14532d; }
-.mp-amber { background: #fef3c7; color: #78350f; }
-.mp-purple { background: #ede9fe; color: #4c1d95; }
+.mp2-blue { background: #eff6ff; color: #1e40af; }
+.mp2-green { background: #dcfce7; color: #14532d; }
+.mp2-amber { background: #fef3c7; color: #78350f; }
+.mp2-purple { background: #ede9fe; color: #4c1d95; }
 .alts { display: flex; flex-direction: column; gap: 6px; margin-top: 6px; }
 .alt-dom { font-size: 13px; font-weight: 700; font-family: 'Courier New', monospace; color: #1a56db; background: #eff6ff; padding: 8px 12px; border-radius: 8px; }
+
+/* GEO INTEL */
+.gi-intro { background: #fff; border: 1px solid #e5e7eb; border-radius: 12px; padding: 12px 14px; margin-bottom: 14px; font-size: 13px; color: #374151; line-height: 1.6; font-weight: 500; }
+.gi-filter { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 14px; }
+.gi-btn { padding: 7px 13px; border: 1.5px solid #d1d5db; border-radius: 20px; font-size: 12px; font-weight: 600; color: #374151; background: #fff; cursor: pointer; font-family: inherit; }
+.gi-btn.active { background: #1a56db; border-color: #1a56db; color: #fff; }
+.gi-cards { display: flex; flex-direction: column; gap: 10px; padding-bottom: 80px; }
+.gi-card { background: #fff; border-radius: 12px; border: 1px solid #e5e7eb; overflow: hidden; }
+.gi-head { padding: 12px 14px 8px; display: flex; align-items: center; justify-content: space-between; }
+.gi-kw { font-size: 15px; font-weight: 800; color: #111827; }
+.gi-cpc { font-size: 11px; font-weight: 700; padding: 3px 9px; border-radius: 20px; }
+.gi-cities { padding: 0 14px 10px; display: flex; flex-direction: column; gap: 6px; }
+.gi-city-row { display: flex; align-items: flex-start; gap: 8px; }
+.gi-city-name { font-size: 13px; font-weight: 700; color: #1a56db; min-width: 120px; flex-shrink: 0; }
+.gi-city-why { font-size: 12px; color: #4b5563; line-height: 1.5; font-weight: 500; }
+.gi-signals { padding: 0 14px 10px; display: flex; flex-wrap: wrap; gap: 4px; }
+.gi-sig { font-size: 11px; background: #f3f4f6; padding: 3px 9px; border-radius: 20px; color: #374151; font-weight: 600; }
 
 /* PITCH */
 .pitch-wrap { padding: 16px; }
@@ -179,23 +186,17 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; b
 .copy-btn:active { background: #1e40af; }
 .tip { background: #eff6ff; border-radius: 10px; padding: 12px; font-size: 13px; color: #1e40af; line-height: 1.6; font-weight: 500; }
 
-/* SELECT */
 .sel-wrap { position: relative; }
 .sel-wrap select { width: 100%; padding: 11px 32px 11px 12px; border: 1.5px solid #d1d5db; border-radius: 9px; font-size: 13px; background: #fff; color: #111827; appearance: none; -webkit-appearance: none; font-family: inherit; font-weight: 500; outline: none; cursor: pointer; }
 .sel-wrap select:focus { border-color: #1a56db; }
 .sel-wrap::after { content: '▾'; position: absolute; right: 11px; top: 50%; transform: translateY(-50%); color: #6b7280; pointer-events: none; font-size: 14px; }
 
-/* TEXT INPUT */
 .text-inp { width: 100%; padding: 11px 12px; border: 1.5px solid #d1d5db; border-radius: 9px; font-size: 13px; background: #fff; color: #111827; font-family: inherit; font-weight: 500; outline: none; }
 .text-inp:focus { border-color: #1a56db; }
 
-/* 2-COL GRID */
 .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 8px; }
-
-/* NO DATA */
 .no-data { text-align: center; padding: 32px 16px; color: #6b7280; font-size: 13px; font-weight: 500; }
 
-/* FIRST LAUNCH OVERLAY */
 .overlay { position: fixed; inset: 0; background: linear-gradient(135deg, #1e3a8a, #1a56db); z-index: 999; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 24px; text-align: center; }
 .overlay.hidden { display: none; }
 .overlay-icon { font-size: 56px; margin-bottom: 14px; }
@@ -230,11 +231,8 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; b
 <div class="page show" id="pageHome">
   <div class="hdr">
     <div class="hdr-row">
-      <div>
-        <h1>GeoDomain Pro</h1>
-        <p>Elite domain investment engine</p>
-      </div>
-      <span class="badge">v5.0</span>
+      <div><h1>GeoDomain Pro</h1><p>Elite domain investment engine</p></div>
+      <span class="badge">v6.0</span>
     </div>
     <div class="key-status">
       <div class="key-dot" id="keyDot"></div>
@@ -243,7 +241,8 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; b
     <div class="tabs" id="mainTabs">
       <button class="tab-btn active" data-tab="0">🔍 Discovery</button>
       <button class="tab-btn" data-tab="1">🧠 Analyzer</button>
-      <button class="tab-btn" data-tab="2">⚙️ Settings</button>
+      <button class="tab-btn" data-tab="2">🗺 Geo Intel</button>
+      <button class="tab-btn" data-tab="3">⚙️ Settings</button>
     </div>
   </div>
 
@@ -264,7 +263,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; b
       <div class="chip active" data-kw="legal">⚖️ Legal</div>
       <div class="chip active" data-kw="home">🏠 Home Services</div>
       <div class="chip active" data-kw="health">🏥 Health</div>
-      <div class="chip" data-kw="tech">💻 Tech & IT</div>
+      <div class="chip" data-kw="tech">💻 Tech &amp; IT</div>
       <div class="chip" data-kw="realestate">🏢 Real Estate</div>
       <div class="chip" data-kw="financial">💰 Financial</div>
       <div class="chip" data-kw="auto">🚗 Auto</div>
@@ -290,13 +289,27 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; b
       <div class="chip green" data-st="New York">New York</div>
     </div>
 
+    <p class="sec">Wealthy Suburb Focus</p>
+    <div class="chip-wrap" id="suburbChips">
+      <div class="chip purple" data-sub="Bellevue, Washington">Bellevue WA</div>
+      <div class="chip purple" data-sub="Scottsdale, Arizona">Scottsdale AZ</div>
+      <div class="chip purple" data-sub="Boca Raton, Florida">Boca Raton FL</div>
+      <div class="chip purple" data-sub="Plano, Texas">Plano TX</div>
+      <div class="chip purple" data-sub="Frisco, Texas">Frisco TX</div>
+      <div class="chip purple" data-sub="Irvine, California">Irvine CA</div>
+      <div class="chip purple" data-sub="Cary, North Carolina">Cary NC</div>
+      <div class="chip purple" data-sub="Henderson, Nevada">Henderson NV</div>
+      <div class="chip purple" data-sub="Gilbert, Arizona">Gilbert AZ</div>
+      <div class="chip purple" data-sub="Naperville, Illinois">Naperville IL</div>
+    </div>
+
     <div class="preview" id="discPreview">Select options above then tap Analyze.</div>
-    <button class="run-btn" id="discRun">🔍 Analyze Domains ↗</button>
+    <button class="run-btn" id="discRun">🔍 Discover Domains ↗</button>
   </div>
 
   <!-- TAB 1: ANALYZER -->
   <div class="scroll" id="tabContent1" style="display:none">
-    <p style="font-size:13px;color:#374151;font-weight:500;line-height:1.6;margin-bottom:4px">Analyze any domain or keyword + city combination for commercial viability, resale potential, and outbound pitch.</p>
+    <p style="font-size:13px;color:#374151;font-weight:500;line-height:1.6;margin-bottom:4px">Analyze any domain or keyword + city combination for commercial viability, resale potential, and outbound pitch strategy.</p>
 
     <p class="sec">Option A — Analyze a domain</p>
     <input class="text-inp" id="anaInputDomain" type="text" placeholder="e.g. TampaRoofing.com" autocapitalize="none" spellcheck="false">
@@ -306,16 +319,34 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; b
       <div class="sel-wrap">
         <select id="anaKwSel">
           <option value="">— Keyword —</option>
-          <option>PersonalInjury</option><option>CarAccidentLawyer</option><option>DUI</option>
-          <option>ImmigrationLawyer</option><option>EstatePlanning</option><option>Roofing</option>
-          <option>RoofRepair</option><option>HVAC</option><option>WaterDamage</option>
-          <option>MoldTest</option><option>Plumbing</option><option>KitchenRemodel</option>
-          <option>SolarInstallation</option><option>SprayFoamInsulation</option>
-          <option>ManagedIT</option><option>ITSupport</option><option>ITSecurity</option>
-          <option>Cybersecurity</option><option>WeightLoss</option><option>MedSpa</option>
-          <option>Orthodontist</option><option>Dentist</option><option>SeniorLiving</option>
-          <option>PhysicalTherapy</option><option>PropertyManagement</option>
-          <option>CommercialRealEstate</option><option>AutoBody</option><option>Towing</option>
+          <optgroup label="Legal">
+            <option>PersonalInjury</option><option>CarAccidentLawyer</option><option>DUI</option>
+            <option>ImmigrationLawyer</option><option>EstatePlanning</option><option>ElderLaw</option><option>CriminalLawyer</option>
+          </optgroup>
+          <optgroup label="Home Services">
+            <option>Roofing</option><option>RoofRepair</option><option>HVAC</option><option>WaterDamage</option>
+            <option>MoldTest</option><option>MoldRemediation</option><option>Plumbing</option><option>Locksmith</option>
+            <option>KitchenRemodel</option><option>SolarInstallation</option><option>SprayFoamInsulation</option>
+            <option>ConcreteContractor</option><option>PestControl</option><option>GutterCleaning</option>
+            <option>RestorationCompany</option><option>WindowReplacement</option>
+          </optgroup>
+          <optgroup label="Tech &amp; IT">
+            <option>ManagedIT</option><option>ITSupport</option><option>ITSecurity</option>
+            <option>Cybersecurity</option><option>ITConsulting</option><option>MSP</option><option>DigitalMarketing</option>
+          </optgroup>
+          <optgroup label="Health">
+            <option>WeightLoss</option><option>MedSpa</option><option>Orthodontist</option><option>Dentist</option>
+            <option>PhysicalTherapy</option><option>SeniorLiving</option><option>Chiropractor</option>
+            <option>MentalHealth</option><option>AddictionTreatment</option>
+          </optgroup>
+          <optgroup label="Real Estate &amp; Financial">
+            <option>PropertyManagement</option><option>CommercialRealEstate</option><option>CashHomeBuyers</option>
+            <option>FinancialAdvisor</option><option>TaxCpa</option><option>Bookkeeping</option>
+          </optgroup>
+          <optgroup label="Auto &amp; Solar">
+            <option>AutoBody</option><option>Towing</option><option>AutoDetailing</option>
+            <option>SolarInstallation</option><option>SolarPanel</option>
+          </optgroup>
         </select>
       </div>
       <input class="text-inp" id="anaCityInp" type="text" placeholder="City name">
@@ -335,11 +366,28 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; b
         <option>Utah</option><option>Virginia</option><option>Washington</option><option>Wisconsin</option>
       </select>
     </div>
-    <button class="run-btn" id="anaRun" style="margin-top:14px">🧠 Analyze Now ↗</button>
+    <button class="run-btn" id="anaRun" style="margin-top:14px">🧠 Full Analysis ↗</button>
   </div>
 
-  <!-- TAB 2: SETTINGS -->
+  <!-- TAB 2: GEO INTEL -->
   <div class="scroll" id="tabContent2" style="display:none">
+    <div class="gi-intro">
+      Hardcoded city-keyword intelligence matrix. No API needed — this is the matching logic baked into every analysis.
+    </div>
+    <p class="sec">Filter by category</p>
+    <div class="gi-filter" id="giFilter">
+      <button class="gi-btn active" data-cat="all">All</button>
+      <button class="gi-btn" data-cat="home">🏠 Home</button>
+      <button class="gi-btn" data-cat="legal">⚖️ Legal</button>
+      <button class="gi-btn" data-cat="tech">💻 Tech</button>
+      <button class="gi-btn" data-cat="health">🏥 Health</button>
+      <button class="gi-btn" data-cat="financial">💰 Finance</button>
+    </div>
+    <div class="gi-cards" id="giCards"></div>
+  </div>
+
+  <!-- TAB 3: SETTINGS -->
+  <div class="scroll" id="tabContent3" style="display:none">
     <p class="sec">Anthropic API Key</p>
     <div class="keybox">
       <div class="keybox-lbl">Paste your key (starts with sk-ant-)</div>
@@ -423,53 +471,254 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; b
 
 // ─── DATA ─────────────────────────────────────────────────────────────
 var CATS = {
-  legal:  { l:'Legal',        kws:'PersonalInjury,CarAccidentLawyer,DUI,ImmigrationLawyer,CriminalLawyer,EstatePlanning,Attorney,ElderLaw' },
-  home:   { l:'Home Svcs',    kws:'Roofing,RoofRepair,HVAC,WaterDamage,MoldTest,Plumbing,KitchenRemodel,SprayFoamInsulation,SolarInstallation,PestControl,Insulation,GutterCleaning,RestorationCompany,WindowReplacement' },
-  health: { l:'Health',       kws:'WeightLoss,MedSpa,Orthodontist,Dentist,PhysicalTherapy,SeniorLiving,BehavioralHealth,AddictionTreatment,Chiropractor,Dermatologist,MentalHealth' },
-  tech:   { l:'Tech & IT',    kws:'ManagedIT,ITSupport,ITSecurity,Cybersecurity,ITConsulting,MSP,DigitalMarketing' },
-  realestate:{ l:'Real Estate',kws:'CommercialRealEstate,PropertyManagement,Realty,CashHomeBuyers,Realtor' },
-  financial:{ l:'Financial',  kws:'TaxCpa,FinancialAdvisor,Accountant,Bookkeeping,BusinessBroker' },
-  auto:   { l:'Auto',         kws:'AutoBody,Autodetailing,Towing,JunkCars' },
-  solar:  { l:'Solar',        kws:'SolarInstallation,SolarPanel,SolarEnergy' }
+  legal:      { l:'Legal',        kws:'PersonalInjury,CarAccidentLawyer,DUI,ImmigrationLawyer,CriminalLawyer,EstatePlanning,ElderLaw,Attorney' },
+  home:       { l:'Home Svcs',    kws:'Roofing,RoofRepair,HVAC,WaterDamage,MoldTest,MoldRemediation,Plumbing,Locksmith,KitchenRemodel,SprayFoamInsulation,SolarInstallation,ConcreteContractor,PestControl,RestorationCompany,WindowReplacement,GutterCleaning' },
+  health:     { l:'Health',       kws:'WeightLoss,MedSpa,Orthodontist,Dentist,PhysicalTherapy,SeniorLiving,BehavioralHealth,AddictionTreatment,Chiropractor,MentalHealth' },
+  tech:       { l:'Tech & IT',    kws:'ManagedIT,ITSupport,ITSecurity,Cybersecurity,ITConsulting,MSP,DigitalMarketing,CloudService' },
+  realestate: { l:'Real Estate',  kws:'CommercialRealEstate,PropertyManagement,CashHomeBuyers,Realtor' },
+  financial:  { l:'Financial',    kws:'TaxCpa,FinancialAdvisor,Accountant,Bookkeeping,BusinessBroker' },
+  auto:       { l:'Auto',         kws:'AutoBody,AutoDetailing,Towing,JunkCars,CarAuction' },
+  solar:      { l:'Solar',        kws:'SolarInstallation,SolarPanel,SolarEnergy,SolarCompany' }
 };
 
 var CITIES = {
-  Texas:       ['Houston','Dallas','Austin','San Antonio','Fort Worth','Plano','Frisco','McKinney'],
-  Florida:     ['Miami','Tampa','Jacksonville','Orlando','Fort Lauderdale','Cape Coral','Boca Raton','Sarasota','Naples'],
-  Arizona:     ['Phoenix','Scottsdale','Tucson','Mesa','Chandler','Gilbert','Surprise'],
-  California:  ['Los Angeles','San Diego','San Jose','Irvine','Sacramento','Riverside'],
-  'North Carolina':['Charlotte','Raleigh','Durham','Cary','Asheville'],
-  Georgia:     ['Atlanta','Savannah','Roswell','Sandy Springs'],
-  Ohio:        ['Columbus','Cleveland','Cincinnati','Akron'],
-  Colorado:    ['Denver','Colorado Springs','Boulder','Fort Collins'],
-  Tennessee:   ['Nashville','Memphis','Knoxville','Chattanooga'],
-  Nevada:      ['Las Vegas','Henderson','Reno'],
-  Michigan:    ['Detroit','Grand Rapids','Ann Arbor'],
-  Washington:  ['Seattle','Bellevue','Tacoma','Spokane'],
-  Oklahoma:    ['Oklahoma City','Tulsa'],
-  Louisiana:   ['New Orleans','Baton Rouge'],
-  'New York':  ['New York','Buffalo','Rochester']
+  Texas:           ['Houston','Dallas','Austin','San Antonio','Fort Worth','Plano','Frisco','McKinney','Irving'],
+  Florida:         ['Miami','Tampa','Jacksonville','Orlando','Fort Lauderdale','Cape Coral','Boca Raton','Sarasota','Naples','Clearwater'],
+  Arizona:         ['Phoenix','Scottsdale','Tucson','Mesa','Chandler','Gilbert','Surprise','Glendale','Tempe'],
+  California:      ['Los Angeles','San Diego','San Jose','Irvine','Sacramento','Riverside','Fresno'],
+  'North Carolina':['Charlotte','Raleigh','Durham','Cary','Asheville','Greensboro'],
+  Georgia:         ['Atlanta','Savannah','Roswell','Sandy Springs','Augusta'],
+  Ohio:            ['Columbus','Cleveland','Cincinnati','Akron','Toledo'],
+  Colorado:        ['Denver','Colorado Springs','Boulder','Fort Collins','Aurora'],
+  Tennessee:       ['Nashville','Memphis','Knoxville','Chattanooga','Murfreesboro'],
+  Nevada:          ['Las Vegas','Henderson','Reno','Sparks'],
+  Michigan:        ['Detroit','Grand Rapids','Ann Arbor','Sterling Heights'],
+  Washington:      ['Seattle','Bellevue','Tacoma','Spokane','Redmond'],
+  Oklahoma:        ['Oklahoma City','Tulsa','Norman'],
+  Louisiana:       ['New Orleans','Baton Rouge','Shreveport'],
+  'New York':      ['New York','Buffalo','Rochester','Yonkers']
 };
 
 var SKEYS  = ['top','resell','leadgen','undervalued','suburbs','midsize'];
 var SLBLS  = ['🏆 Value','⚡ Resell','🎯 Lead Gen','💎 Hidden','🏘 Suburbs','🌆 Mid-Cities'];
-var OUTLBLS= ['Top 20 Highest Value','Top 20 Fast Resell','Top 20 Best Lead Gen','Top 20 Undervalued','Wealthy Suburb Picks','Mid-Size City Picks'];
+var OUTLBLS= ['Top 15 Highest Value','Top 15 Fast Resell','Top 15 Best Lead Gen','Top 15 Undervalued','Wealthy Suburb Picks','Mid-Size City Picks'];
 
-var selKws    = new Set(['legal','home','health']);
-var selStates = new Set(['Texas','Florida','Arizona']);
-var selOut    = 0;
-var curTab    = 0;
-var lastData  = { results:{} };
-var lastR     = null;
+var selKws     = new Set(['legal','home','health']);
+var selStates  = new Set(['Texas','Florida','Arizona']);
+var selSuburbs = new Set();
+var selOut     = 0;
+var curTab     = 0;
+var lastData   = { results: {} };
+var lastR      = null;
 var pitchReturnPage = 'pageResults';
 
+// ─── GEO INTEL DATA ────────────────────────────────────────────────────
+var GEO_INTEL = [
+  {
+    kw:'Roofing / Roof Repair', cat:'home', cpc:'$30–80', cpcCls:'mp-green',
+    signals:['Hurricane Zone','Hailstorms','High Insurance Claims','$8K–15K Avg Ticket'],
+    cities:[
+      {name:'Houston, TX', why:'Category 1–5 hurricane exposure + hail capital of the US, >200K homeowners'},
+      {name:'Tampa, FL', why:'Direct hurricane landfall risk, massive annual roof insurance claim volume'},
+      {name:'Dallas, TX', why:'Severe hailstorm corridor, fast-growing suburbs, very high roofing contractor density'},
+      {name:'Denver, CO', why:'Peak hail season May–August, high insurance claim rates, suburban expansion'},
+      {name:'Oklahoma City, OK', why:'Tornado Alley center, extreme storm damage, high emergency re-roof demand'}
+    ]
+  },
+  {
+    kw:'HVAC / AC Repair', cat:'home', cpc:'$25–60', cpcCls:'mp-green',
+    signals:['100°F+ Summers','Emergency AC Demand','$4K–12K Systems','Year-Round Billing'],
+    cities:[
+      {name:'Phoenix, AZ', why:'Hottest major city in US (110°F+), AC failure = emergency, 300+ sunny days'},
+      {name:'Las Vegas, NV', why:'Extreme desert heat, high income tourists/residents, dense housing market'},
+      {name:'Dallas, TX', why:'Scorching summers, millions of homes, emergency service call density is extreme'},
+      {name:'Houston, TX', why:'High humidity + heat combo, busiest AC market in the South'},
+      {name:'Orlando, FL', why:'Year-round heat and humidity, massive tourism + residential market'}
+    ]
+  },
+  {
+    kw:'Water Damage / Restoration', cat:'home', cpc:'$40–100', cpcCls:'mp-red',
+    signals:['Hurricane Zone','Flooding','70%+ Humidity','$10K–50K Claims','Insurance Driven'],
+    cities:[
+      {name:'Tampa, FL', why:'Hurricane Ian direct hit zone, storm surge + flooding, highest claim volume in FL'},
+      {name:'Miami, FL', why:'Sea level flooding, tropical storms, aging infrastructure, massive population'},
+      {name:'Houston, TX', why:'Hurricane Harvey flooded 150K+ homes, bayou flooding is annual, #1 flood city'},
+      {name:'Jacksonville, FL', why:'St. Johns River flooding, hurricane exposure, fast-growing population'},
+      {name:'New Orleans, LA', why:'Below sea level, extreme flood history, Katrina legacy, ongoing claim demand'}
+    ]
+  },
+  {
+    kw:'Mold Test / Remediation', cat:'home', cpc:'$20–50', cpcCls:'mp-amber',
+    signals:['Humidity >65%','Annual Rain >50"','Post-Flood Demand','Health Concern Driver'],
+    cities:[
+      {name:'Portland, OR', why:'167 rainy days/year, humidity >70%, mold growth endemic to Pacific Northwest'},
+      {name:'Tampa, FL', why:'Post-hurricane mold surge, tropical humidity, homeowners scared after flooding'},
+      {name:'Miami, FL', why:'Year-round tropical humidity, post-storm indoor mold epidemic'},
+      {name:'Seattle, WA', why:'150+ rainy days/year, constant moisture, mold is a universal Pacific NW problem'},
+      {name:'New Orleans, LA', why:'Post-Katrina mold legacy still drives ongoing demand, extreme humidity'}
+    ]
+  },
+  {
+    kw:'Solar Installation', cat:'home', cpc:'$15–40', cpcCls:'mp-amber',
+    signals:['280+ Sun Days','High Electricity Rates','State Incentives','$20K–40K Ticket'],
+    cities:[
+      {name:'Phoenix, AZ', why:'330 sunny days/year, highest solar ROI in US, strong state net metering'},
+      {name:'Las Vegas, NV', why:'294 sunny days, NV Energy high rates, massive residential market'},
+      {name:'San Diego, CA', why:'Highest utility rates in US, ideal climate, very high homeowner adoption'},
+      {name:'Austin, TX', why:'Strong sun, ERCOT grid unreliability drives battery + solar interest'},
+      {name:'Denver, CO', why:'300 sunny days, CO incentives, eco-conscious affluent homeowner base'}
+    ]
+  },
+  {
+    kw:'Plumbing', cat:'home', cpc:'$20–50', cpcCls:'mp-amber',
+    signals:['High Volume Emergency','Aging Infrastructure','Fast-Growing Population'],
+    cities:[
+      {name:'Houston, TX', why:'Largest city in South, aging pipes, hard water, extreme volume'},
+      {name:'Dallas, TX', why:'Rapid population growth strains infrastructure, massive residential base'},
+      {name:'Atlanta, GA', why:'Old infrastructure + suburban sprawl + hard water issues'},
+      {name:'Miami, FL', why:'Dense population, aging mid-century homes, saltwater pipe corrosion'},
+      {name:'Charlotte, NC', why:'One of fastest-growing US cities, new construction demand is extreme'}
+    ]
+  },
+  {
+    kw:'Spray Foam Insulation', cat:'home', cpc:'$20–50', cpcCls:'mp-amber',
+    signals:['Extreme Heat','Energy Efficiency Demand','New Construction','$3K–8K Ticket'],
+    cities:[
+      {name:'Houston, TX', why:'Energy Star incentives + extreme heat, 1M+ single-family homes'},
+      {name:'Dallas, TX', why:'High energy costs, new construction boom in suburbs, affluent homeowners'},
+      {name:'Nashville, TN', why:'Construction explosion, energy-conscious buyers in new developments'},
+      {name:'Oklahoma City, OK', why:'Extreme temp swings, energy efficiency culture, affordable remodel market'},
+      {name:'Atlanta, GA', why:'Hot summers, large suburban housing market, growing contractor ecosystem'}
+    ]
+  },
+  {
+    kw:'Concrete Contractor', cat:'home', cpc:'$15–40', cpcCls:'mp-amber',
+    signals:['Construction Boom','Commercial Expansion','New Subdivisions'],
+    cities:[
+      {name:'Dallas, TX', why:'Largest commercial construction market in US, new highways + warehouses'},
+      {name:'Houston, TX', why:'Massive port/industrial expansion, petrochemical facilities, housing boom'},
+      {name:'Austin, TX', why:'Tech campus + residential explosion, concrete demand at all-time high'},
+      {name:'Phoenix, AZ', why:'Desert heat drives concrete over grass, commercial growth is extreme'},
+      {name:'Charlotte, NC', why:'Corporate relocation wave creating massive commercial concrete demand'}
+    ]
+  },
+  {
+    kw:'Personal Injury Lawyer', cat:'legal', cpc:'$100–300', cpcCls:'mp-red',
+    signals:['Highest CPC Niche','High Traffic Density','$50K+ Avg Settlement','Contingency Fee'],
+    cities:[
+      {name:'Houston, TX', why:'Largest city in South, major highway fatalities, top PI market nationally'},
+      {name:'Miami, FL', why:'Notoriously dangerous roads, high uninsured motorist rate, large caseload'},
+      {name:'Atlanta, GA', why:'Spaghetti Junction + fast growth = accident surge, big verdicts common'},
+      {name:'Dallas, TX', why:'Highway complexity + aggressive driving culture, massive population'},
+      {name:'Los Angeles, CA', why:'Highest accident density in US, very high settlement values'}
+    ]
+  },
+  {
+    kw:'Immigration Lawyer', cat:'legal', cpc:'$50–150', cpcCls:'mp-red',
+    signals:['Large Immigrant Population','High Case Volume','Referral Network Driven'],
+    cities:[
+      {name:'Houston, TX', why:'Largest Hispanic city in US, massive Central American immigration pipeline'},
+      {name:'Miami, FL', why:'Gateway city for Caribbean + South American immigration, #1 FL market'},
+      {name:'Los Angeles, CA', why:'Largest immigrant population in US, LA County alone has 3.5M immigrants'},
+      {name:'Dallas, TX', why:'High-growth immigrant economy, tech + hospitality sector visa demand'},
+      {name:'San Antonio, TX', why:'Border proximity, high Hispanic population, strong community referrals'}
+    ]
+  },
+  {
+    kw:'Estate Planning / Elder Law', cat:'legal', cpc:'$30–80', cpcCls:'mp-green',
+    signals:['High Net Worth','Retiree Migration','Wealth Transfer Demand'],
+    cities:[
+      {name:'Boca Raton, FL', why:'America\'s top retirement wealth hub, median HHI $90K+, massive estate demand'},
+      {name:'Naples, FL', why:'Highest per-capita income in FL, extreme retiree density, billionaire corridors'},
+      {name:'Scottsdale, AZ', why:'Top retirement destination, tech-wealth migrants from CA, large estate market'},
+      {name:'Sarasota, FL', why:'Median age 47+, retirement migration capital, significant probate market'},
+      {name:'Henderson, NV', why:'Fastest-growing retirement city in US, CA wealth migration, no state tax appeal'}
+    ]
+  },
+  {
+    kw:'Managed IT / IT Support / MSP', cat:'tech', cpc:'$40–120', cpcCls:'mp-red',
+    signals:['Tech Ecosystem','SMB Density','$2K–10K/mo MRR','Enterprise Demand'],
+    cities:[
+      {name:'Seattle, WA', why:'Amazon + Microsoft HQ city, highest tech density in US, huge MSP demand'},
+      {name:'Bellevue, WA', why:'Microsoft campus + tech wealth suburb, SMBs pay premium for IT support'},
+      {name:'Austin, TX', why:'Silicon Hills = 900+ tech companies, massive SMB + mid-market IT demand'},
+      {name:'Raleigh, NC', why:'Research Triangle Park = biotech + pharma + IT, underserved MSP market'},
+      {name:'Denver, CO', why:'Fastest-growing tech city outside of coasts, strong SMB IT outsourcing culture'}
+    ]
+  },
+  {
+    kw:'Cybersecurity / IT Security', cat:'tech', cpc:'$60–150', cpcCls:'mp-red',
+    signals:['Enterprise Demand','Compliance Requirements','Breach Response','High MRR'],
+    cities:[
+      {name:'Seattle, WA', why:'Cloud + enterprise tech epicenter, CISO demand is extreme across the region'},
+      {name:'Bellevue, WA', why:'Microsoft + Expedia + T-Mobile campus city, security compliance is mandated'},
+      {name:'Raleigh, NC', why:'Research Triangle biotech/pharma requires HIPAA + SOC2 compliance partners'},
+      {name:'Austin, TX', why:'Tech company explosion creates massive compliance and pen-testing demand'},
+      {name:'Atlanta, GA', why:'Fortune 500 concentration + FinTech hub = #1 cyber market in Southeast'}
+    ]
+  },
+  {
+    kw:'Senior Living', cat:'health', cpc:'$15–40', cpcCls:'mp-amber',
+    signals:['Retiree Migration','65+ Population >20%','#1 Retirement Destinations'],
+    cities:[
+      {name:'Sarasota, FL', why:'#1 retirement city in US for 5 consecutive years, median age 47, 25%+ seniors'},
+      {name:'Naples, FL', why:'Richest retiree concentration in Florida, Collier County 65+ rate is extreme'},
+      {name:'Boca Raton, FL', why:'Palm Beach County retirement hub, 100,000+ senior residents in metro'},
+      {name:'Scottsdale, AZ', why:'Top-5 retirement destination nationally, luxury senior living capital of AZ'},
+      {name:'Henderson, NV', why:'Fastest-growing senior population in US, Sun City Anthem has 30K residents'}
+    ]
+  },
+  {
+    kw:'Weight Loss / Med Spa', cat:'health', cpc:'$10–30', cpcCls:'mp-amber',
+    signals:['Affluent Demographics','HHI $100K+','Luxury Wellness Culture'],
+    cities:[
+      {name:'Miami, FL', why:'Body-conscious culture, large affluent Latin + international population'},
+      {name:'Scottsdale, AZ', why:'Luxury wellness capital of AZ, HHI $95K+, heavy med-spa concentration'},
+      {name:'Boca Raton, FL', why:'Affluent retiree + middle-aged demographic, luxury health spending is high'},
+      {name:'Los Angeles, CA', why:'Global wellness trend capital, every neighborhood has med-spa competition'},
+      {name:'Naples, FL', why:'Highest per-capita HHI in FL, wellness spending among highest nationally'}
+    ]
+  },
+  {
+    kw:'Orthodontist / Dentist', cat:'health', cpc:'$20–60', cpcCls:'mp-green',
+    signals:['Wealthy Suburbs','Families + Children','High Dental Coverage'],
+    cities:[
+      {name:'Frisco, TX', why:'Fastest-growing city in US, median HHI $120K, family-dense suburb with kids'},
+      {name:'Plano, TX', why:'Corporate HQ suburb, median age 35, high-income families with dental insurance'},
+      {name:'Cary, NC', why:'Research Triangle suburb, educated affluent families, very low orthodontist competition'},
+      {name:'Irvine, CA', why:'Planned community, median HHI $100K+, strong Asian-American family market'},
+      {name:'Bellevue, WA', why:'Tech-wealth families, high dental spend, premium services expected'}
+    ]
+  },
+  {
+    kw:'Property Management', cat:'financial', cpc:'$15–40', cpcCls:'mp-amber',
+    signals:['High Rental Demand','Investor-Heavy Market','10% Monthly Recurring'],
+    cities:[
+      {name:'Austin, TX', why:'Tech migration + university = 60%+ renters, investor property explosion'},
+      {name:'Nashville, TN', why:'Short-term rental + long-term rental boom, Airbnb + housing investor market'},
+      {name:'Charlotte, NC', why:'Corporate relocation surge, 40% renter population, investor-dense market'},
+      {name:'Atlanta, GA', why:'Large investor-owned single-family rental market, institutional buyer city'},
+      {name:'Tampa, FL', why:'Post-pandemic migration surge, vacation rental coast, 45%+ renter density'}
+    ]
+  },
+  {
+    kw:'Financial Advisor / Tax CPA', cat:'financial', cpc:'$30–80', cpcCls:'mp-green',
+    signals:['High Net Worth','Retirement Assets','Tax Complexity','Wealth Transfer'],
+    cities:[
+      {name:'Scottsdale, AZ', why:'CA tech-wealth migration, HHI $95K+, complex portfolio tax needs'},
+      {name:'Boca Raton, FL', why:'Retiree wealth hub, estate + tax planning demand is extremely high'},
+      {name:'Naples, FL', why:'Highest per-capita HHI in FL, billionaire winter residents, tax complexity'},
+      {name:'Bellevue, WA', why:'Microsoft stock-wealthy employees, RSU tax complexity, high HHI'},
+      {name:'Plano, TX', why:'Corporate HQ suburb, executive compensation + equity tax planning demand'}
+    ]
+  }
+];
+
+var GI_CAT_FILTER = 'all';
+
 // ─── UTILS ────────────────────────────────────────────────────────────
-function getKey() {
-  try { return localStorage.getItem('gdk') || ''; } catch(e) { return ''; }
-}
-function saveKey(v) {
-  try { localStorage.setItem('gdk', v); } catch(e) {}
-}
+function getKey()   { try { return localStorage.getItem('gdk') || ''; } catch(e) { return ''; } }
+function saveKey(v) { try { localStorage.setItem('gdk', v); } catch(e) {} }
 function showPage(id) {
   document.querySelectorAll('.page').forEach(function(p){ p.classList.remove('show'); });
   document.getElementById(id).classList.add('show');
@@ -490,28 +739,22 @@ get('overlaySave').addEventListener('click', function() {
   var v = get('overlayKey').value.trim();
   if (!v) { alert('Please paste your API key.'); return; }
   if (!v.startsWith('sk-')) { alert('Key must start with sk-ant-\nGet it at console.anthropic.com'); return; }
-  saveKey(v);
-  updateKeyUI();
+  saveKey(v); updateKeyUI();
   get('overlay').classList.add('hidden');
 });
-get('overlayKey').addEventListener('keydown', function(e) {
-  if (e.key === 'Enter') get('overlaySave').click();
-});
+get('overlayKey').addEventListener('keydown', function(e) { if (e.key === 'Enter') get('overlaySave').click(); });
 
 // ─── SETTINGS SAVE ────────────────────────────────────────────────────
 get('settingsSave').addEventListener('click', function() {
   var v = get('settingsKey').value.trim();
   if (!v) { alert('Paste your API key first.'); return; }
   if (!v.startsWith('sk-')) { alert('Key must start with sk-ant-\nGet it at console.anthropic.com'); return; }
-  saveKey(v);
-  updateKeyUI();
+  saveKey(v); updateKeyUI();
   var ok = get('settingsOk');
   ok.style.display = 'block';
   setTimeout(function(){ ok.style.display = 'none'; }, 3000);
 });
-get('settingsKey').addEventListener('keydown', function(e) {
-  if (e.key === 'Enter') get('settingsSave').click();
-});
+get('settingsKey').addEventListener('keydown', function(e) { if (e.key === 'Enter') get('settingsSave').click(); });
 
 // ─── MAIN TABS ────────────────────────────────────────────────────────
 get('mainTabs').addEventListener('click', function(e) {
@@ -521,9 +764,10 @@ get('mainTabs').addEventListener('click', function(e) {
   curTab = n;
   document.querySelectorAll('.tab-btn').forEach(function(b){ b.classList.remove('active'); });
   btn.classList.add('active');
-  ['tabContent0','tabContent1','tabContent2'].forEach(function(id, i){
+  ['tabContent0','tabContent1','tabContent2','tabContent3'].forEach(function(id, i){
     get(id).style.display = (i === n) ? 'block' : 'none';
   });
+  if (n === 2) renderGeoIntel();
 });
 
 // ─── OUTPUT TYPE BUTTONS ──────────────────────────────────────────────
@@ -556,11 +800,22 @@ get('stateChips').addEventListener('click', function(e) {
   updatePreview();
 });
 
+// ─── SUBURB CHIPS ─────────────────────────────────────────────────────
+get('suburbChips').addEventListener('click', function(e) {
+  var chip = e.target.closest('.chip');
+  if (!chip) return;
+  var s = chip.dataset.sub;
+  if (selSuburbs.has(s)) { selSuburbs.delete(s); chip.classList.remove('active'); }
+  else { selSuburbs.add(s); chip.classList.add('active'); }
+  updatePreview();
+});
+
 // ─── PREVIEW ──────────────────────────────────────────────────────────
 function updatePreview() {
   var cats = Array.from(selKws).map(function(k){ return CATS[k] ? CATS[k].l : k; }).join(', ') || 'none';
   var states = Array.from(selStates).join(', ') || 'none';
-  get('discPreview').textContent = OUTLBLS[selOut] + ' · ' + cats + ' · ' + states;
+  var subs = selSuburbs.size ? ' + ' + selSuburbs.size + ' wealthy suburb(s)' : '';
+  get('discPreview').textContent = OUTLBLS[selOut] + ' · ' + cats + ' · ' + states + subs;
 }
 
 // ─── BACK BUTTONS ─────────────────────────────────────────────────────
@@ -580,9 +835,76 @@ get('resTabs').addEventListener('click', function(e) {
   if (tc) tc.classList.add('active');
 });
 
-// ─── API CALL ─────────────────────────────────────────────────────────
-var SYS = 'You are an elite geo-domain investment analyst. Return ONLY raw JSON — no markdown, no code fences.\n\nCity matching rules:\n- ROOFING: Houston,Tampa,Dallas,Denver,Oklahoma City (storms,hail)\n- HVAC: Phoenix,Las Vegas,Dallas,Houston,Orlando (extreme heat)\n- WATER DAMAGE/MOLD: Tampa,Miami,Jacksonville,Houston,New Orleans,Portland,Seattle\n- SOLAR: Phoenix,Las Vegas,San Diego,Austin,Denver\n- PERSONAL INJURY/CAR ACCIDENT: Houston,Miami,Atlanta,Dallas,Los Angeles\n- SENIOR LIVING/MED SPA: Boca Raton,Naples,Sarasota,Scottsdale,Phoenix\n- WEIGHT LOSS: Miami,Scottsdale,Boca Raton,LA,San Diego\n- MANAGED IT/MSP: Seattle,Bellevue,Austin,Raleigh,Denver,Charlotte\n\nDomain format: CityKeyword.com or KeywordCity.com. Natural, no hyphens.\n\nFOR DISCOVERY JSON:\n{"results":{"SECTIONKEY":[15 entries]},"stats":{"total":15,"extreme":int,"avgCI":float,"premium":int},"insights":{"cities":["city: reason","city: reason"],"niches":["niche: reason","niche: reason"],"emerging":["opportunity"]},"buyNow":["d1","d2","d3","d4","d5"]}\n\nEach entry: {rank(int),domain,city,state,cat,why(max 18 words),demand("Low"|"Medium"|"High"|"Extreme"),ci(int 1-10),seo(int 1-10),lg(int 1-10),brand(int 1-10),resale,avail("High"|"Moderate"|"Low"),ext(array 2 strings),vars(array 2 strings)}\n\nFOR ANALYZER JSON:\n{domain,city,state,cat,verdict(1 sentence),why(2 sentences),drivers,ci,seo,lg,brand,trust,cpc,competition,buyerPool,flipProb,outboundProb,resale,spendHeavily,natural,seoAligned,alts(array 3 strings),works(array of strings)}';
+// ─── GEO INTEL FILTER ─────────────────────────────────────────────────
+get('giFilter').addEventListener('click', function(e) {
+  var btn = e.target.closest('.gi-btn');
+  if (!btn) return;
+  document.querySelectorAll('.gi-btn').forEach(function(b){ b.classList.remove('active'); });
+  btn.classList.add('active');
+  GI_CAT_FILTER = btn.dataset.cat;
+  renderGeoIntel();
+});
 
+function renderGeoIntel() {
+  var filtered = GI_CAT_FILTER === 'all' ? GEO_INTEL : GEO_INTEL.filter(function(g){ return g.cat === GI_CAT_FILTER; });
+  var html = filtered.map(function(g) {
+    var citiesHtml = g.cities.map(function(c) {
+      return '<div class="gi-city-row"><div class="gi-city-name">' + c.name + '</div><div class="gi-city-why">' + c.why + '</div></div>';
+    }).join('');
+    var sigsHtml = g.signals.map(function(s){ return '<span class="gi-sig">' + s + '</span>'; }).join('');
+    return '<div class="gi-card">'
+      + '<div class="gi-head"><div class="gi-kw">' + g.kw + '</div><span class="gi-cpc ' + g.cpcCls + '">CPC ' + g.cpc + '</span></div>'
+      + '<div class="gi-signals">' + sigsHtml + '</div>'
+      + '<div class="gi-cities">' + citiesHtml + '</div>'
+      + '</div>';
+  }).join('');
+  get('giCards').innerHTML = html || '<div class="no-data">No data for this category.</div>';
+}
+
+// ─── SYSTEM PROMPT ────────────────────────────────────────────────────
+var SYS = 'You are an elite geo-domain investment analyst. Return ONLY raw JSON — no markdown, no code fences.\n\n'
+  + 'CITY-KEYWORD MATCHING INTELLIGENCE:\n'
+  + 'ROOFING/ROOF REPAIR [CPC $30-80] → Houston TX, Tampa FL, Dallas TX, Denver CO, Oklahoma City OK, Fort Worth TX, Charlotte NC | storms,hail,hurricane,insurance claims,$8K-15K ticket\n'
+  + 'HVAC/AC REPAIR [CPC $25-60] → Phoenix AZ, Las Vegas NV, Dallas TX, Houston TX, Orlando FL, Mesa AZ, Chandler AZ, Gilbert AZ | 100°F+ summers,emergency AC,$4K-12K systems\n'
+  + 'WATER DAMAGE/RESTORATION [CPC $40-100] → Tampa FL, Miami FL, Jacksonville FL, Houston TX, New Orleans LA, Cape Coral FL, Baton Rouge LA | hurricanes,flooding,70% humidity,$10K-50K claims\n'
+  + 'MOLD TEST/REMEDIATION [CPC $20-50] → Portland OR, Tampa FL, Miami FL, Seattle WA, New Orleans LA, Houston TX, Jacksonville FL | rain>50in/yr,humidity>65%,post-flood\n'
+  + 'PLUMBING [CPC $20-50] → Houston TX, Dallas TX, Atlanta GA, Miami FL, Charlotte NC, San Antonio TX | high volume,aging pipes,fast-growing\n'
+  + 'SOLAR [CPC $15-40] → Phoenix AZ, Las Vegas NV, San Diego CA, Austin TX, Denver CO, Sacramento CA, Tucson AZ | 280+ sun days,high energy costs,$20K-40K ticket\n'
+  + 'PERSONAL INJURY/CAR ACCIDENT [CPC $100-300] → Houston TX, Miami FL, Atlanta GA, Dallas TX, Los Angeles CA, Tampa FL | high traffic,large population,$50K+ avg settlement\n'
+  + 'IMMIGRATION LAWYER [CPC $50-150] → Houston TX, Miami FL, Los Angeles CA, Dallas TX, New York NY, San Antonio TX | large immigrant populations\n'
+  + 'ESTATE PLANNING/ELDER LAW [CPC $30-80] → Boca Raton FL, Naples FL, Scottsdale AZ, Sarasota FL, Henderson NV, Irvine CA | high net worth,retirees,wealth transfer\n'
+  + 'SENIOR LIVING [CPC $15-40] → Sarasota FL, Naples FL, Boca Raton FL, Scottsdale AZ, Phoenix AZ, Henderson NV | #1 retirement destinations,65+ population >20%\n'
+  + 'WEIGHT LOSS/MED SPA [CPC $10-30] → Miami FL, Scottsdale AZ, Boca Raton FL, Los Angeles CA, San Diego CA, Naples FL | affluent,HHI $100K+,wellness culture\n'
+  + 'MANAGED IT/IT SUPPORT/MSP [CPC $40-120] → Seattle WA, Bellevue WA, Austin TX, Raleigh NC, Denver CO, Charlotte NC, Cary NC | tech ecosystems,SMB density,$2K-10K/mo MRR\n'
+  + 'CYBERSECURITY/IT SECURITY [CPC $60-150] → Seattle WA, Bellevue WA, Raleigh NC, Austin TX, Denver CO, Atlanta GA | enterprise demand,compliance,breach risk\n'
+  + 'PROPERTY MANAGEMENT [CPC $15-40] → Austin TX, Nashville TN, Charlotte NC, Atlanta GA, Tampa FL, Orlando FL | high rental demand,investor-heavy markets\n'
+  + 'KITCHEN REMODEL/RENOVATION [CPC $15-40] → Frisco TX, Plano TX, Naperville IL, Cary NC, Irvine CA, Gilbert AZ, Bellevue WA | affluent suburbs,HHI $90K+,homeowner age 35-55\n'
+  + 'SPRAY FOAM INSULATION [CPC $20-50] → Houston TX, Dallas TX, Austin TX, Nashville TN, Oklahoma City OK, Atlanta GA | extreme heat,energy efficiency,$3K-8K ticket\n'
+  + 'ORTHODONTIST/DENTIST [CPC $20-60] → Frisco TX, Plano TX, Cary NC, Irvine CA, Scottsdale AZ, Bellevue WA | wealthy suburbs,families,high dental coverage\n'
+  + 'FINANCIAL ADVISOR/TAX CPA [CPC $30-80] → Scottsdale AZ, Boca Raton FL, Naples FL, Bellevue WA, Plano TX, Irvine CA | high net worth,retirement assets\n'
+  + 'CONCRETE CONTRACTOR [CPC $15-40] → Dallas TX, Houston TX, Austin TX, Phoenix AZ, Charlotte NC, Nashville TN | construction boom,commercial expansion\n'
+  + 'LOCKSMITH [CPC $15-40] → Houston TX, Dallas TX, Miami FL, Atlanta GA, Las Vegas NV, Phoenix AZ | 24/7 emergency,tourists,dense urban\n\n'
+  + 'DOMAIN QUALITY RULES:\n'
+  + 'GOOD: CityKeyword.com or KeywordCity.com — 2-3 words max, natural English, no hyphens\n'
+  + 'GOOD examples: PhoenixHVAC.com, TampaRoofing.com, BellevueITSupport.com, ScottsdaleWeightLoss.com\n'
+  + 'BAD: plurals, long names, awkward grammar, keyword stuffing\n\n'
+  + 'WEALTHY SUBURBS (prioritize for relevant niches): Bellevue WA, Scottsdale AZ, Boca Raton FL, Plano TX, Frisco TX, Irvine CA, Cary NC, Henderson NV, Gilbert AZ, Naperville IL\n\n'
+  + 'FOR DISCOVERY JSON:\n'
+  + '{"results":{"SECTION":[15 entries]},"stats":{"total":15,"extreme":N,"avgCI":N.N,"premium":N},'
+  + '"insights":{"cities":["city: reason","city: reason"],"niches":["niche: reason","niche: reason"],"emerging":["opportunity"]},'
+  + '"buyNow":["d1","d2","d3","d4","d5"]}\n'
+  + 'Each entry: {rank(int),domain,city,state,cat,why(max 20 words),demand("Low"|"Medium"|"High"|"Extreme"),'
+  + 'ci(1-10),seo(1-10),lg(1-10),brand(1-10),trust(1-10),'
+  + 'cpc("Low"|"Medium"|"High"|"Extreme"),competition("Low"|"Medium"|"High"),buyerPool("Small"|"Medium"|"Large"),'
+  + 'flipProb("Low"|"Medium"|"High"),resale(string),avail("High"|"Moderate"|"Low"),vars(array 2 domain strings)}\n\n'
+  + 'FOR ANALYZER JSON:\n'
+  + '{domain,city,state,cat,verdict(1 sentence),why(2-3 sentences),drivers(brief string),'
+  + 'ci,seo,lg,brand,trust,cpc("Low"|"Medium"|"High"|"Extreme"),competition("Low"|"Medium"|"High"),'
+  + 'buyerPool(descriptive string),flipProb("Low"|"Medium"|"High"),outboundProb("Low"|"Medium"|"High"),'
+  + 'resale(string),spendHeavily(bool),natural(bool),seoAligned(bool),'
+  + 'alts(array 3 domain strings),works(array of strings)}';
+
+// ─── API CALL ─────────────────────────────────────────────────────────
 async function callAPI(msg, tokens) {
   var key = getKey();
   var resp = await fetch('https://api.anthropic.com/v1/messages', {
@@ -594,7 +916,7 @@ async function callAPI(msg, tokens) {
       'anthropic-dangerous-direct-browser-access': 'true'
     },
     body: JSON.stringify({
-      model: 'claude-sonnet-4-5',
+      model: 'claude-sonnet-4-6',
       max_tokens: tokens,
       system: SYS,
       messages: [{ role: 'user', content: msg }]
@@ -622,15 +944,16 @@ function parseJSON(raw) {
 var PROGS = [
   ['Mapping local economic signals…', 15],
   ['Cross-referencing climate & demographics…', 32],
-  ['Scoring advertiser competition…', 50],
+  ['Scoring advertiser competition & CPC rates…', 50],
   ['Estimating resale & buyer pools…', 68],
-  ['Building domain rankings…', 85]
+  ['Building domain rankings by commercial value…', 85]
 ];
 
 // ─── DISCOVERY ────────────────────────────────────────────────────────
 get('discRun').addEventListener('click', function() {
   if (!getKey()) { alert('Add your API key in the Settings tab first.'); return; }
-  if (!selKws.size || !selStates.size) { alert('Pick at least one category and one state.'); return; }
+  if (!selKws.size && !selSuburbs.size) { alert('Pick at least one keyword category.'); return; }
+  if (!selStates.size && !selSuburbs.size) { alert('Pick at least one state or suburb.'); return; }
   runDiscovery();
 });
 
@@ -646,20 +969,28 @@ async function runDiscovery() {
 
   var kwList = Array.from(selKws).reduce(function(a, k){ return a.concat((CATS[k].kws || '').split(',')); }, []);
   var cityList = Array.from(selStates).reduce(function(a, s){ return a.concat((CITIES[s] || []).map(function(c){ return c + ', ' + s; })); }, []);
+  var suburbList = Array.from(selSuburbs);
+  var allCities = cityList.concat(suburbList);
   var focusKey = SKEYS[selOut];
 
-  get('loadTitle').textContent = 'Analyzing ' + cityList.length + ' cities × ' + kwList.length + ' keywords…';
+  get('loadTitle').textContent = 'Analyzing ' + allCities.length + ' cities × ' + kwList.length + ' keywords…';
   get('loadStep').textContent = 'Usually 20–35 seconds';
+
+  var suburbNote = suburbList.length ? '\nWealthy suburb boost: ' + suburbList.join(', ') : '';
+  var focusNote = selOut === 4 ? '\nIMPORTANT: Focus heavily on wealthy suburbs like Bellevue, Scottsdale, Boca Raton, Plano, Frisco, Irvine, Cary, Henderson, Gilbert, Naperville.' : '';
 
   var prompt = 'DISCOVERY — ONE SECTION ONLY: "' + focusKey + '" with 15 entries.\n'
     + 'Also include stats, insights, buyNow.\n\n'
-    + 'Cities: ' + cityList.slice(0,20).join(' | ') + '\n'
-    + 'Keywords: ' + kwList.slice(0,20).join(',') + '\n\n'
+    + 'Cities: ' + allCities.slice(0,25).join(' | ') + '\n'
+    + 'Keywords: ' + kwList.slice(0,22).join(',') + '\n'
+    + suburbNote + focusNote + '\n\n'
     + 'JSON key for results must be: "' + focusKey + '"\n'
-    + 'Keep each "why" under 18 words. Real city-keyword matching only.';
+    + 'Each "why" max 20 words. Real city-keyword matching only — no random combinations.\n'
+    + 'Prioritize: high CPC niches, emergency services, insurance-driven demand, B2B recurring revenue.\n'
+    + 'Include trust score and all meta fields (cpc,competition,buyerPool,flipProb) in every entry.';
 
   try {
-    var raw = await callAPI(prompt, 3500);
+    var raw = await callAPI(prompt, 4000);
     clearInterval(pt);
     get('progBar').style.width = '100%';
     var parsed = parseJSON(raw);
@@ -688,7 +1019,7 @@ function renderDiscovery(d, focusKey) {
   (ins.cities || []).slice(0,2).forEach(function(i){ ih += '<div class="insight-item">🏙 ' + i + '</div>'; });
   (ins.niches || []).slice(0,2).forEach(function(i){ ih += '<div class="insight-item">🎯 ' + i + '</div>'; });
   (ins.emerging || []).slice(0,1).forEach(function(i){ ih += '<div class="insight-item">🚀 ' + i + '</div>'; });
-  if (d.buyNow && d.buyNow.length) ih += '<div class="insight-item">🛒 Buy Now: ' + d.buyNow.slice(0,5).join(', ') + '</div>';
+  if (d.buyNow && d.buyNow.length) ih += '<div class="insight-item">🛒 Register Now: ' + d.buyNow.slice(0,5).join(', ') + '</div>';
   if (ih) { get('insightContent').innerHTML = ih; get('insightBox').style.display = 'block'; }
   else { get('insightBox').style.display = 'none'; }
 
@@ -720,36 +1051,61 @@ function stat(v, l) {
   return '<div class="stat"><div class="stat-v">' + v + '</div><div class="stat-l">' + l + '</div></div>';
 }
 
+function cpcClass(v) {
+  if (v === 'Extreme') return 'mp-red';
+  if (v === 'High') return 'mp-green';
+  if (v === 'Medium') return 'mp-amber';
+  return 'mp-gray';
+}
+function flipClass(v) {
+  if (v === 'High') return 'mp-green';
+  if (v === 'Medium') return 'mp-blue';
+  return 'mp-gray';
+}
+function bpClass(v) {
+  if (v === 'Large') return 'mp-green';
+  if (v === 'Medium') return 'mp-blue';
+  return 'mp-gray';
+}
+
 function buildCard(r, i, sec) {
   var dmap = { Extreme:'d-extreme', High:'d-high', Medium:'d-medium', Low:'d-low' };
   var amap = { High:'av-h', Moderate:'av-m', Low:'av-l' };
   var rkCls = r.rank <= 3 ? 'gold' : r.rank <= 8 ? 'blue' : '';
-  var ext = Array.isArray(r.ext) ? r.ext.join(' ') : '.com .net';
   var vars = Array.isArray(r.vars) ? r.vars.map(function(v){ return '<span class="var-pill">' + v + '</span>'; }).join('') : '';
   var top5 = (r.rank || i+1) <= 5;
+
+  var meta2 = '';
+  if (r.cpc) meta2 += '<span class="mpill ' + cpcClass(r.cpc) + '">CPC: ' + r.cpc + '</span>';
+  if (r.competition) meta2 += '<span class="mpill mp-blue">Competition: ' + r.competition + '</span>';
+  if (r.buyerPool) meta2 += '<span class="mpill ' + bpClass(r.buyerPool) + '">Buyers: ' + r.buyerPool + '</span>';
+  if (r.flipProb) meta2 += '<span class="mpill ' + flipClass(r.flipProb) + '">Flip: ' + r.flipProb + '</span>';
+
   return '<div class="card">'
     + '<div class="card-top">'
     + '<div class="rank ' + rkCls + '">' + (r.rank || i+1) + '</div>'
     + '<div class="card-info">'
     + '<div class="card-domain">' + (r.domain || '') + '</div>'
-    + '<div class="card-meta">' + (r.city || '') + ', ' + (r.state || '') + ' · ' + (r.cat || '') + ' · ' + ext + '</div>'
+    + '<div class="card-meta">' + (r.city || '') + ', ' + (r.state || '') + ' · ' + (r.cat || '') + '</div>'
     + '</div>'
     + '<span class="demand ' + (dmap[r.demand] || 'd-medium') + '">' + (r.demand || '') + '</span>'
     + '</div>'
     + '<div class="card-why">' + (r.why || '') + '</div>'
-    + '<div class="card-foot">'
-    + '<div class="scores">'
-    + '<div class="score"><div class="score-v">' + (r.ci||'—') + '</div><div class="score-l">CI</div></div>'
-    + '<div class="score"><div class="score-v">' + (r.seo||'—') + '</div><div class="score-l">SEO</div></div>'
-    + '<div class="score"><div class="score-v">' + (r.lg||'—') + '</div><div class="score-l">LG</div></div>'
-    + '<div class="score"><div class="score-v">' + (r.brand||'—') + '</div><div class="score-l">Brand</div></div>'
+    + '<div class="card-scores">'
+    + sc(r.ci,'CI') + sc(r.seo,'SEO') + sc(r.lg,'LG') + sc(r.brand,'Brand') + sc(r.trust,'Trust')
     + '</div>'
+    + (meta2 ? '<div class="card-meta2">' + meta2 + '</div>' : '')
+    + '<div class="card-foot">'
     + '<span class="resale">' + (r.resale || '—') + '</span>'
-    + '<span class="avail ' + (amap[r.avail] || 'av-m') + '">' + (r.avail || '?') + '</span>'
+    + '<span class="avail ' + (amap[r.avail] || 'av-m') + '">' + (r.avail || '?') + ' Avail</span>'
     + '</div>'
     + (vars ? '<div class="card-vars">' + vars + '</div>' : '')
     + (top5 ? '<button class="pitch-btn" data-dom="' + (r.domain||'') + '" data-sec="' + sec + '">✉️ Generate Cold Pitch Emails →</button>' : '')
     + '</div>';
+}
+
+function sc(v, l) {
+  return '<div class="score"><div class="score-v">' + (v||'—') + '</div><div class="score-l">' + l + '</div></div>';
 }
 
 function bindPitchButtons() {
@@ -772,16 +1128,17 @@ window.loadSection = async function(key, idx) {
 
   var kwList = Array.from(selKws).reduce(function(a,k){ return a.concat((CATS[k].kws||'').split(',')); }, []);
   var cityList = Array.from(selStates).reduce(function(a,s){ return a.concat((CITIES[s]||[]).map(function(c){ return c+', '+s; })); }, []);
+  var suburbList = Array.from(selSuburbs);
 
   var prompt = 'DISCOVERY — ONE SECTION ONLY: "' + key + '" with 15 entries.\n'
-    + 'Cities: ' + cityList.slice(0,20).join(' | ') + '\n'
-    + 'Keywords: ' + kwList.slice(0,20).join(',') + '\n'
+    + 'Cities: ' + cityList.concat(suburbList).slice(0,25).join(' | ') + '\n'
+    + 'Keywords: ' + kwList.slice(0,22).join(',') + '\n'
     + 'JSON: {"results":{"' + key + '":[...15 entries...]}}\n'
-    + 'Each entry: {rank,domain,city,state,cat,why(max 18 words),demand,ci,seo,lg,brand,resale,avail,ext,vars}\n'
-    + 'Real matching only. Keep why under 18 words.';
+    + 'Each entry: {rank,domain,city,state,cat,why(max 20 words),demand,ci,seo,lg,brand,trust,cpc,competition,buyerPool,flipProb,resale,avail,vars}\n'
+    + 'Real matching only. Prioritize high-CPC, emergency, and insurance-driven niches.';
 
   try {
-    var raw = await callAPI(prompt, 3000);
+    var raw = await callAPI(prompt, 3500);
     var parsed = parseJSON(raw);
     var rows = ((parsed.results || {})[key]) || [];
     if (!lastData.results) lastData.results = {};
@@ -812,18 +1169,19 @@ get('anaRun').addEventListener('click', function() {
 async function runAnalyzer(subject, kw, city, state) {
   showPage('pageLoad');
   get('loadTitle').textContent = 'Analyzing ' + subject + '…';
-  get('loadSub').textContent = 'Scoring commercial viability, SEO, resale…';
+  get('loadSub').textContent = 'Scoring commercial viability, SEO, resale, buyer pool…';
   get('loadStep').textContent = 'Usually 10–15 seconds';
   get('progBar').style.width = '40%';
 
-  var prompt = 'ANALYZER MODE. Analyze: ' + subject + '\n'
-    + (kw ? 'Keyword: ' + kw + '\n' : '')
+  var prompt = 'ANALYZER MODE. Analyze this domain/combination: ' + subject + '\n'
+    + (kw ? 'Keyword niche: ' + kw + '\n' : '')
     + (city ? 'City: ' + city + '\n' : '')
     + (state ? 'State: ' + state + '\n' : '')
-    + '\nReturn analyzer JSON with all fields. Include 3 better alternative domains in alts array.';
+    + '\nReturn full analyzer JSON with ALL fields including: verdict, why, drivers, ci, seo, lg, brand, trust, cpc, competition, buyerPool, flipProb, outboundProb, resale, spendHeavily, natural, seoAligned, alts (3 domain alternatives), works (array of 3-5 use cases).\n'
+    + 'Be specific about city-keyword fit using the matching intelligence. Explain WHY this city is or is not ideal for this keyword.';
 
   try {
-    var raw = await callAPI(prompt, 2000);
+    var raw = await callAPI(prompt, 2500);
     get('progBar').style.width = '100%';
     var parsed = parseJSON(raw);
     lastR = { domain: parsed.domain, city: parsed.city, state: parsed.state, cat: parsed.cat, why: parsed.why, resale: parsed.resale };
@@ -838,10 +1196,12 @@ async function runAnalyzer(subject, kw, city, state) {
 }
 
 function renderAnalyzer(d) {
-  var cpc = { Low:'mp-blue', Medium:'mp-amber', High:'mp-green', Extreme:'mp-green' };
-  var prob = { Low:'mp-amber', Medium:'mp-blue', High:'mp-green' };
-  var works = Array.isArray(d.works) ? d.works.map(function(w){ return '<span class="meta-pill mp-blue">'+w+'</span>'; }).join('') : '';
-  var alts = Array.isArray(d.alts) ? d.alts.map(function(a){ return '<div class="alt-dom">'+a+'</div>'; }).join('') : '';
+  var cpcC = cpcClass(d.cpc);
+  var compC = d.competition === 'High' ? 'mp2-green' : d.competition === 'Medium' ? 'mp2-amber' : 'mp2-blue';
+  var flipC = d.flipProb === 'High' ? 'mp2-green' : d.flipProb === 'Medium' ? 'mp2-blue' : 'mp2-amber';
+  var outC  = d.outboundProb === 'High' ? 'mp2-green' : d.outboundProb === 'Medium' ? 'mp2-blue' : 'mp2-amber';
+  var works = Array.isArray(d.works) ? d.works.map(function(w){ return '<span class="meta-pill mp2-blue">'+w+'</span>'; }).join('') : '';
+  var alts  = Array.isArray(d.alts)  ? d.alts.map(function(a){ return '<div class="alt-dom">'+a+'</div>'; }).join('') : '';
 
   get('anaContent').innerHTML =
     '<div class="ana-result">'
@@ -850,30 +1210,40 @@ function renderAnalyzer(d) {
     + '<div class="ana-sub">' + (d.city||'') + (d.state?', '+d.state:'') + (d.cat?' · '+d.cat:'') + '</div>'
     + '</div>'
     + '<div class="ana-body">'
+
+    + '<div class="section-title" style="margin-top:0">Score Breakdown</div>'
     + '<div class="score-grid">'
     + sg(d.ci,'CI') + sg(d.seo,'SEO') + sg(d.lg,'LG') + sg(d.brand,'Brand') + sg(d.trust,'Trust')
     + '</div>'
+
     + '<div class="section-title">Verdict</div>'
     + '<div class="verdict">' + (d.verdict||'') + '</div>'
-    + '<div class="section-title">Analysis</div>'
+
+    + '<div class="section-title">Why This City Fits</div>'
     + '<div class="why-text">' + (d.why||'') + '</div>'
-    + (d.drivers ? '<div class="why-text" style="color:#6b7280;margin-top:6px;font-style:italic">' + d.drivers + '</div>' : '')
+    + (d.drivers ? '<div class="why-text" style="color:#6b7280;margin-top:6px;font-style:italic;font-size:12px">Demand drivers: ' + d.drivers + '</div>' : '')
+
     + '<hr class="sep">'
+    + '<div class="section-title">Commercial Intelligence</div>'
     + '<div class="meta-wrap">'
-    + mp('CPC: '+(d.cpc||'?'), cpc[d.cpc]||'mp-blue')
-    + mp('Competition: '+(d.competition||'?'), cpc[d.competition]||'mp-blue')
-    + mp('Buyers: '+(d.buyerPool||'?'), 'mp-purple')
-    + mp('Flip: '+(d.flipProb||'?'), prob[d.flipProb]||'mp-amber')
-    + mp('Outbound: '+(d.outboundProb||'?'), prob[d.outboundProb]||'mp-amber')
-    + (d.spendHeavily ? mp('Heavy ad spenders ✓','mp-green') : '')
-    + (d.natural ? mp('Natural wording ✓','mp-green') : mp('Awkward wording ✗','mp-amber'))
-    + (d.seoAligned ? mp('SEO aligned ✓','mp-green') : '')
+    + mp2('CPC: '+(d.cpc||'?'), cpcC)
+    + mp2('Competition: '+(d.competition||'?'), compC)
+    + mp2('Buyer Pool: '+(d.buyerPool||'?'), 'mp2-purple')
+    + mp2('Flip Prob: '+(d.flipProb||'?'), flipC)
+    + mp2('Outbound: '+(d.outboundProb||'?'), outC)
+    + (d.spendHeavily ? mp2('Heavy Ad Spenders ✓','mp2-green') : mp2('Low Ad Spend ⚠','mp2-amber'))
+    + (d.natural ? mp2('Natural Wording ✓','mp2-green') : mp2('Awkward Wording ✗','mp2-amber'))
+    + (d.seoAligned ? mp2('SEO Aligned ✓','mp2-green') : mp2('SEO Mismatch','mp2-amber'))
     + '</div>'
-    + (works ? '<div class="meta-wrap" style="margin-top:6px">' + works + '</div>' : '')
+
+    + (works ? '<div class="section-title">Best Use Cases</div><div class="meta-wrap">' + works + '</div>' : '')
+
     + '<hr class="sep">'
     + '<div class="section-title">Resale Estimate</div>'
-    + '<div style="font-size:18px;font-weight:800;color:#111827;margin-bottom:12px">' + (d.resale||'—') + '</div>'
-    + (alts ? '<div class="section-title">Better Alternatives</div><div class="alts">' + alts + '</div>' : '')
+    + '<div style="font-size:22px;font-weight:800;color:#111827;margin-bottom:12px">' + (d.resale||'—') + '</div>'
+
+    + (alts ? '<div class="section-title">Stronger Alternatives</div><div class="alts">' + alts + '</div>' : '')
+
     + '<button class="run-btn" style="margin-top:16px" onclick="if(lastR)runPitch(lastR)">✉️ Generate Cold Pitch Emails →</button>'
     + '</div></div>';
 }
@@ -881,7 +1251,7 @@ function renderAnalyzer(d) {
 function sg(v, l) {
   return '<div class="sg"><div class="sg-v">' + (v||'—') + '</div><div class="sg-l">' + l + '</div></div>';
 }
-function mp(txt, cls) {
+function mp2(txt, cls) {
   return '<span class="meta-pill ' + cls + '">' + txt + '</span>';
 }
 
@@ -891,13 +1261,15 @@ window.runPitch = async function(r) {
   get('pitchContent').innerHTML = '<div class="loader"><div class="spin"></div><div class="loader-title">Writing emails…</div></div>';
   showPage('pagePitch');
 
-  var prompt = 'Write 3 cold outbound emails to sell the domain ' + (r.domain||'this domain') + '.\n'
-    + 'Context: ' + (r.why||'strong local demand') + '\n'
+  var prompt = 'Write 3 cold outbound sales emails to sell the domain ' + (r.domain||'this domain') + '.\n'
     + 'Niche: ' + (r.cat||'local service') + ' in ' + (r.city||'city') + ', ' + (r.state||'state') + '\n'
-    + 'Target resale: ' + (r.resale||'$1,000–$3,000') + '\n\n'
+    + 'Why this domain has value: ' + (r.why||'strong local demand') + '\n'
+    + 'Target resale price: ' + (r.resale||'$1,000–$3,000') + '\n\n'
     + 'Return JSON only (no markdown):\n'
-    + '{"emails":[{"label":"Email 1 — Day 1","subject":"...","body":"..."},{"label":"Email 2 — Day 4","subject":"...","body":"..."},{"label":"Email 3 — Day 10","subject":"...","body":"..."}]}\n'
-    + 'Each under 130 words. Conversational. 1 local detail each. Day 10 = urgency (listing on Afternic/Sedo soon).';
+    + '{"emails":[{"label":"Email 1 — Day 1","subject":"...","body":"..."},{"label":"Email 2 — Day 5","subject":"...","body":"..."},{"label":"Email 3 — Day 12","subject":"...","body":"..."}]}\n'
+    + 'Rules: Each email under 130 words. Conversational tone, not salesy. Include 1 specific local fact per email. '
+    + 'Email 1: introduce domain value. Email 2: SEO angle. Email 3: urgency (listing on Afternic/Sedo soon). '
+    + 'Address the owner/CEO directly. Mention the specific city and niche. Explain how the domain generates leads.';
 
   try {
     var raw = await callAPI(prompt, 2000);
@@ -919,7 +1291,7 @@ window.runPitch = async function(r) {
         + '</div>';
     });
 
-    html += '<div class="tip"><strong>🎯 Workflow:</strong> LinkedIn → find owner/CEO → grab website → verify email at Hunter.io → send sequence. Target: 5–50 employee firms spending on Google Ads.</div>';
+    html += '<div class="tip"><strong>🎯 Outreach Workflow:</strong> LinkedIn → find owner/CEO → grab business website → verify email at Hunter.io → send sequence. Target: 5–50 employee firms actively spending on Google Ads in this niche.</div>';
     get('pitchContent').innerHTML = html;
 
   } catch(err) {
